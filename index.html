@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บันทึกยอดส่งน้ำดื่ม ศร.</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0a7c5c;
+    --primary-light: #13a87a;
+    --primary-dark: #065c43;
+    --accent: #00c8a0;
+    --accent2: #00b8d4;
+    --sky: #0891b2;
+    --sky-light: #e0f7fa;
+    --emerald-light: #d1fae5;
+    --text: #0f3d2e;
+    --text-muted: #4a7c68;
+    --bg: #f0faf6;
+    --card: #ffffff;
+    --border: #b2dfdb;
+    --danger: #ef4444;
+    --gold: #f59e0b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Prompt', 'Sarabun', sans-serif;
+    background: linear-gradient(135deg, #0a7c5c 0%, #065c43 30%, #0891b2 100%);
+    min-height: 100vh;
+    padding: 16px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .app-wrapper {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 28px 20px 20px;
+    animation: slideDown 0.6s ease;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+    padding: 6px 18px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.5px;
+  }
+
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    line-height: 1.2;
+  }
+
+  .header h1 span {
+    color: #7fffdf;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 6px;
+  }
+
+  .drop-icon {
+    font-size: 36px;
+    animation: dropFloat 3s ease-in-out infinite;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* Date selector */
+  .date-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+
+  .date-icon { font-size: 24px; }
+
+  .date-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+  }
+
+  .date-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Prompt', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  /* Main Card */
+  .card {
+    background: var(--card);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    margin-bottom: 16px;
+    animation: fadeUp 0.5s ease 0.2s both;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px 14px;
+    position: relative;
+  }
+
+  .section-header.credit {
+    background: linear-gradient(135deg, #0a7c5c, #13a87a);
+  }
+
+  .section-header.cash {
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+  }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3px;
+  }
+
+  .section-subtitle {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+  }
+
+  .section-body {
+    padding: 8px 16px 16px;
+  }
+
+  /* Input Fields */
+  .field-group {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f9f6;
+  }
+
+  .field-group:last-child { border-bottom: none; }
+
+  .field-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .field-label .tag {
+    background: var(--emerald-light);
+    color: var(--primary);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .field-label .tag.blue {
+    background: var(--sky-light);
+    color: var(--sky);
+  }
+
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: end;
+  }
+
+  .input-wrapper {
+    position: relative;
+  }
+
+  .input-wrapper .unit {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 500;
+    pointer-events: none;
+  }
+
+  .input-sub-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 5px;
+  }
+
+  input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    border: 2px solid #e8f5e9;
+    border-radius: 12px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    background: #f9fffe;
+    transition: all 0.2s;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+  input[type="number"]:focus, input[type="text"]:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 200, 160, 0.1);
+  }
+
+  .bonus-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #fff8e1, #fffde7);
+    border: 1.5px solid #fcd34d;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #92400e;
+    font-weight: 600;
+    min-height: 46px;
+  }
+
+  .bonus-badge .gift-icon { font-size: 18px; }
+
+  /* Note field */
+  .note-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    animation: fadeUp 0.5s ease 0.35s both;
+  }
+
+  .note-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e8f5e9;
+    border-radius: 12px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: #f9fffe;
+    resize: none;
+    outline: none;
+    transition: all 0.2s;
+    height: 70px;
+  }
+
+  textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0, 200, 160, 0.1);
+  }
+
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--primary-light), var(--sky));
+    border: none;
+    border-radius: 20px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(10, 124, 92, 0.4);
+    animation: fadeUp 0.5s ease 0.4s both;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(10, 124, 92, 0.5);
+  }
+
+  .submit-btn:active { transform: translateY(0); }
+
+  .submit-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 2.5s infinite;
+  }
+
+  /* OVERLAY */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,20,15,0.6);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: #fff;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 420px;
+    overflow: hidden;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  }
+
+  .overlay.active .modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-header {
+    background: linear-gradient(135deg, #0a7c5c, #0891b2);
+    padding: 20px 24px;
+    text-align: center;
+  }
+
+  .modal-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .modal-header p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 4px;
+  }
+
+  .modal-body {
+    padding: 20px 24px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .summary-section {
+    margin-bottom: 16px;
+  }
+
+  .summary-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .summary-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px dashed #f0f9f6;
+    font-size: 14px;
+  }
+
+  .summary-row:last-child { border-bottom: none; }
+
+  .summary-row .label { color: #555; }
+  .summary-row .value { font-weight: 700; color: var(--text); }
+  .summary-row .value.bonus { color: var(--gold); }
+  .summary-row .value.total { color: var(--primary); font-size: 16px; }
+  .summary-row .value.cash-total { color: var(--sky); font-size: 16px; }
+
+  .total-box {
+    background: linear-gradient(135deg, var(--emerald-light), var(--sky-light));
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .total-box .tl { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .total-box .tv { font-size: 20px; font-weight: 800; color: var(--primary); }
+
+  .modal-footer {
+    padding: 16px 24px 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-cancel {
+    flex: 1;
+    padding: 14px;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-confirm {
+    flex: 2;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary-light), var(--sky));
+    border: none;
+    border-radius: 14px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(10, 124, 92, 0.35);
+  }
+
+  .btn-confirm:hover { transform: translateY(-1px); }
+  .btn-cancel:hover { background: #e2e8f0; }
+
+  /* Success Modal */
+  .success-modal {
+    background: #fff;
+    border-radius: 28px;
+    width: 280px;
+    padding: 40px 30px;
+    text-align: center;
+    transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  }
+
+  .overlay.active .success-modal {
+    transform: scale(1);
+  }
+
+  .check-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-light), var(--accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 40px;
+    animation: popIn 0.5s ease 0.1s both;
+    box-shadow: 0 10px 30px rgba(10, 124, 92, 0.4);
+  }
+
+  .success-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .success-sub {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  .btn-done {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary-light), var(--sky));
+    border: none;
+    border-radius: 14px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(10, 124, 92, 0.35);
+  }
+
+  /* Config section */
+  .config-toggle {
+    text-align: center;
+    margin-bottom: 12px;
+    animation: fadeUp 0.5s ease 0.45s both;
+  }
+
+  .config-toggle button {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    padding: 8px 18px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .config-toggle button:hover { background: rgba(255,255,255,0.22); }
+
+  .config-panel {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 16px;
+    display: none;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .config-panel.open { display: block; }
+
+  .config-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .config-field label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .config-field input {
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 10px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .config-field input::placeholder { color: rgba(255,255,255,0.4); }
+  .config-field input:focus { outline: none; border-color: var(--accent); }
+
+  .btn-save-config {
+    width: 100%;
+    padding: 10px;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  /* Animations */
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes dropFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Price auto calc indicator */
+  .price-hint {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 4px;
+    text-align: right;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 4px 0 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="drop-icon">💧</span>
+    <div class="header-badge">🏢 โรงน้ำดื่ม ศร.</div>
+    <h1>บันทึกยอดส่งน้ำ<span>ประจำวัน</span></h1>
+    <p class="header-sub">ระบบรายงานน้ำดื่ม ศร. | เชื่อมต่อ Google Sheets & LINE</p>
+  </div>
+
+  <!-- Date Selector -->
+  <div class="date-card">
+    <span class="date-icon">📅</span>
+    <div style="flex:1">
+      <div class="date-label">วันที่รายงาน</div>
+      <input type="date" class="date-input" id="reportDate">
+    </div>
+  </div>
+
+  <!-- ===== รายการเงินเชื่อ ===== -->
+  <div class="card">
+    <div class="section-header credit">
+      <div class="section-icon">📋</div>
+      <div>
+        <div class="section-title">รายการเงินเชื่อ</div>
+        <div class="section-subtitle">ยอดส่งน้ำถัง / บรรจุภัณฑ์ (เครดิต)</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="field-group">
+        <div class="field-label">🏢 กองพันบริการ <span class="tag">ถัง 18.9 ล.</span></div>
+        <div class="input-wrapper">
+          <input type="number" id="creditService" value="0" min="0" placeholder="0">
+          <span class="unit">ถัง</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">🏫 กองพัน นนส. <span class="tag">ถัง 18.9 ล.</span></div>
+        <div class="input-wrapper">
+          <input type="number" id="creditNNS" value="0" min="0" placeholder="0">
+          <span class="unit">ถัง</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">🏛️ ศร.พัน.2 <span class="tag">ถัง 18.9 ล.</span></div>
+        <div class="input-wrapper">
+          <input type="number" id="creditSRP2" value="0" min="0" placeholder="0">
+          <span class="unit">ถัง</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field-group">
+        <div class="field-label">🧴 น้ำดื่ม 350 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวนแพ็ค</div>
+            <div class="input-wrapper">
+              <input type="number" id="credit350" value="0" min="0" oninput="calcBonus('350')">
+              <span class="unit">แพ็ค</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">🎁 ของแถม</div>
+            <div class="bonus-badge" id="bonus350"><span class="gift-icon">🎁</span> — แพ็ค</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">🧴 น้ำดื่ม 600 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวนแพ็ค</div>
+            <div class="input-wrapper">
+              <input type="number" id="credit600" value="0" min="0" oninput="calcBonus('600')">
+              <span class="unit">แพ็ค</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">🎁 ของแถม</div>
+            <div class="bonus-badge" id="bonus600"><span class="gift-icon">🎁</span> — แพ็ค</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== รายการเงินสด / โอน ===== -->
+  <div class="card">
+    <div class="section-header cash">
+      <div class="section-icon">💵</div>
+      <div>
+        <div class="section-title">รายการเงินสด / โอนเข้าบัญชี</div>
+        <div class="section-subtitle">ยอดขายสด & ราคาต่อหน่วย</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="field-group">
+        <div class="field-label">🪣 น้ำถัง 18.9 ลิตร <span class="tag blue">สด/โอน</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวน</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashTank189" value="0" min="0" oninput="calcPrice('tank189')">
+              <span class="unit">ถัง</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">ราคา/ถัง (บาท)</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashTank189Price" value="25" min="0" oninput="calcPrice('tank189')">
+              <span class="unit">฿</span>
+            </div>
+          </div>
+        </div>
+        <div class="price-hint">รวม: <strong id="cashTank189Total">0</strong> บาท</div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">🫙 น้ำพร้อมถัง <span class="tag blue">สด/โอน</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวน</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashReadyTank" value="0" min="0" oninput="calcPrice('readyTank')">
+              <span class="unit">ถัง</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">ราคา/ถัง (บาท)</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashReadyTankPrice" value="200" min="0" oninput="calcPrice('readyTank')">
+              <span class="unit">฿</span>
+            </div>
+          </div>
+        </div>
+        <div class="price-hint">รวม: <strong id="cashReadyTankTotal">0</strong> บาท</div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">🧴 น้ำดื่ม 350 ml. <span class="tag blue">สด/โอน</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวน</div>
+            <div class="input-wrapper">
+              <input type="number" id="cash350" value="0" min="0" oninput="calcPrice('350')">
+              <span class="unit">แพ็ค</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">ราคา/แพ็ค (บาท)</div>
+            <div class="input-wrapper">
+              <input type="number" id="cash350Price" value="35" min="0" oninput="calcPrice('350')">
+              <span class="unit">฿</span>
+            </div>
+          </div>
+        </div>
+        <div class="price-hint">รวม: <strong id="cash350Total">0</strong> บาท</div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">🧴 น้ำดื่ม 600 ml. <span class="tag blue">สด/โอน</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวน</div>
+            <div class="input-wrapper">
+              <input type="number" id="cash600" value="0" min="0" oninput="calcPrice('600cash')">
+              <span class="unit">แพ็ค</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">ราคา/แพ็ค (บาท)</div>
+            <div class="input-wrapper">
+              <input type="number" id="cash600Price" value="45" min="0" oninput="calcPrice('600cash')">
+              <span class="unit">฿</span>
+            </div>
+          </div>
+        </div>
+        <div class="price-hint">รวม: <strong id="cash600Total">0</strong> บาท</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Note -->
+  <div class="note-card">
+    <div class="note-label">📝 หมายเหตุ (ถ้ามี)</div>
+    <textarea id="note" placeholder="เช่น มีสินค้าขาด / ยานพาหนะมีปัญหา / หมายเหตุพิเศษ..."></textarea>
+  </div>
+
+  <!-- Config Toggle -->
+  <div class="config-toggle">
+    <button onclick="toggleConfig()">⚙️ ตั้งค่าการเชื่อมต่อ (Apps Script & LINE)</button>
+  </div>
+
+  <div class="config-panel" id="configPanel">
+    <div class="config-title">⚙️ การตั้งค่าระบบ</div>
+    <div class="config-field">
+      <label>🔗 Google Apps Script URL</label>
+      <input type="text" id="cfgAppsScript" placeholder="https://script.google.com/macros/s/.../exec">
+    </div>
+    <div class="config-field">
+      <label>📲 LINE Notify Token</label>
+      <input type="text" id="cfgLineToken" placeholder="xxxxxxxxxxxxxxxxxxxxxxx">
+    </div>
+    <button class="btn-save-config" onclick="saveConfig()">💾 บันทึกการตั้งค่า</button>
+  </div>
+
+  <!-- Submit -->
+  <button class="submit-btn" onclick="previewData()">
+    🚀 ส่งข้อมูล &amp; บันทึก
+  </button>
+
+  <div style="height: 30px;"></div>
+</div>
+
+<!-- ===== Preview Modal ===== -->
+<div class="overlay" id="previewOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>📋 ตรวจสอบข้อมูลก่อนบันทึก</h2>
+      <p id="previewDate"></p>
+    </div>
+    <div class="modal-body" id="previewBody"></div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closePreview()">◀ แก้ไข</button>
+      <button class="btn-confirm" id="confirmBtn" onclick="submitData()">✅ ยืนยัน &amp; บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Success Modal ===== -->
+<div class="overlay" id="successOverlay">
+  <div class="success-modal">
+    <div class="check-circle">✅</div>
+    <div class="success-title">บันทึกสำเร็จ!</div>
+    <div class="success-sub" id="successSub">บันทึกและส่ง LINE เรียบร้อยแล้ว</div>
+    <button class="btn-done" onclick="closeSuccess()">เสร็จสิ้น 🎉</button>
+  </div>
+</div>
+
+<script>
+// =================== CONFIG ===================
+let CONFIG = {
+  appsScriptUrl: localStorage.getItem('appsScriptUrl') || '',
+  lineToken: localStorage.getItem('lineToken') || ''
+};
+
+function loadConfig() {
+  document.getElementById('cfgAppsScript').value = CONFIG.appsScriptUrl;
+  document.getElementById('cfgLineToken').value = CONFIG.lineToken;
+}
+
+function saveConfig() {
+  CONFIG.appsScriptUrl = document.getElementById('cfgAppsScript').value.trim();
+  CONFIG.lineToken = document.getElementById('cfgLineToken').value.trim();
+  localStorage.setItem('appsScriptUrl', CONFIG.appsScriptUrl);
+  localStorage.setItem('lineToken', CONFIG.lineToken);
+  alert('✅ บันทึกการตั้งค่าเรียบร้อย');
+  toggleConfig();
+}
+
+function toggleConfig() {
+  const panel = document.getElementById('configPanel');
+  panel.classList.toggle('open');
+  loadConfig();
+}
+
+// =================== DATE ===================
+function setDefaultDate() {
+  const today = new Date();
+  const y = today.getFullYear();
+  const m = String(today.getMonth() + 1).padStart(2, '0');
+  const d = String(today.getDate()).padStart(2, '0');
+  document.getElementById('reportDate').value = `${y}-${m}-${d}`;
+}
+
+function formatDateThai(dateStr) {
+  if (!dateStr) return '';
+  const months = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const [y, m, d] = dateStr.split('-');
+  return `${parseInt(d)} ${months[parseInt(m)-1]} ${parseInt(y)+543}`;
+}
+
+// =================== BONUS CALC ===================
+function calcBonus(size) {
+  const val = parseInt(document.getElementById(`credit${size}`).value) || 0;
+  const bonus = Math.floor(val / 10);
+  const el = document.getElementById(`bonus${size}`);
+  if (bonus > 0) {
+    el.innerHTML = `<span class="gift-icon">🎁</span> <span style="color:#92400e;font-size:16px;font-weight:800;">${bonus}</span> แพ็ค`;
+    el.style.borderColor = '#fbbf24';
+  } else {
+    el.innerHTML = `<span class="gift-icon">🎁</span> — แพ็ค`;
+    el.style.borderColor = '#fcd34d';
+  }
+}
+
+// =================== PRICE CALC ===================
+function calcPrice(type) {
+  const map = {
+    'tank189': { qty: 'cashTank189', price: 'cashTank189Price', total: 'cashTank189Total' },
+    'readyTank': { qty: 'cashReadyTank', price: 'cashReadyTankPrice', total: 'cashReadyTankTotal' },
+    '350': { qty: 'cash350', price: 'cash350Price', total: 'cash350Total' },
+    '600cash': { qty: 'cash600', price: 'cash600Price', total: 'cash600Total' },
+  };
+  const ids = map[type];
+  const qty = parseFloat(document.getElementById(ids.qty).value) || 0;
+  const price = parseFloat(document.getElementById(ids.price).value) || 0;
+  document.getElementById(ids.total).textContent = (qty * price).toLocaleString();
+}
+
+// =================== GET DATA ===================
+function getData() {
+  const g = id => parseFloat(document.getElementById(id).value) || 0;
+  return {
+    reportDate: document.getElementById('reportDate').value,
+    creditService: g('creditService'),
+    creditNNS: g('creditNNS'),
+    creditSRP2: g('creditSRP2'),
+    credit350: g('credit350'),
+    credit600: g('credit600'),
+    cashTank189: g('cashTank189'),
+    cashTank189Price: g('cashTank189Price'),
+    cashTank189Baht: g('cashTank189') * g('cashTank189Price'),
+    cashReadyTank: g('cashReadyTank'),
+    cashReadyTankPrice: g('cashReadyTankPrice'),
+    cashReadyTankBaht: g('cashReadyTank') * g('cashReadyTankPrice'),
+    cash350: g('cash350'),
+    cash350Price: g('cash350Price'),
+    cash350Baht: g('cash350') * g('cash350Price'),
+    cash600: g('cash600'),
+    cash600Price: g('cash600Price'),
+    cash600Baht: g('cash600') * g('cash600Price'),
+    note: document.getElementById('note').value.trim()
+  };
+}
+
+// =================== PREVIEW ===================
+function previewData() {
+  const d = getData();
+  const bonus350 = Math.floor(d.credit350 / 10);
+  const bonus600 = Math.floor(d.credit600 / 10);
+  const totalCredit = d.creditService + d.creditNNS + d.creditSRP2;
+  const totalCash = d.cashTank189Baht + d.cashReadyTankBaht + d.cash350Baht + d.cash600Baht;
+
+  document.getElementById('previewDate').textContent = `📅 ${formatDateThai(d.reportDate)}`;
+
+  let html = `
+    <div class="summary-section">
+      <div class="summary-title">📋 เงินเชื่อ - น้ำถัง</div>
+      <div class="summary-row"><span class="label">🏢 กองพันบริการ</span><span class="value">${d.creditService} ถัง</span></div>
+      <div class="summary-row"><span class="label">🏫 กองพัน นนส.</span><span class="value">${d.creditNNS} ถัง</span></div>
+      <div class="summary-row"><span class="label">🏛️ ศร.พัน.2</span><span class="value">${d.creditSRP2} ถัง</span></div>
+      <div class="summary-row"><span class="label">✅ รวมถังเชื่อ</span><span class="value total">${totalCredit} ถัง</span></div>
+    </div>`;
+
+  if (d.credit350 > 0 || d.credit600 > 0) {
+    html += `
+    <div class="summary-section">
+      <div class="summary-title">🧴 เงินเชื่อ - บรรจุภัณฑ์</div>
+      <div class="summary-row"><span class="label">350 ml.</span><span class="value">${d.credit350} แพ็ค</span></div>
+      ${bonus350 > 0 ? `<div class="summary-row"><span class="label">🎁 แถม 350 ml.</span><span class="value bonus">${bonus350} แพ็ค</span></div>` : ''}
+      <div class="summary-row"><span class="label">600 ml.</span><span class="value">${d.credit600} แพ็ค</span></div>
+      ${bonus600 > 0 ? `<div class="summary-row"><span class="label">🎁 แถม 600 ml.</span><span class="value bonus">${bonus600} แพ็ค</span></div>` : ''}
+    </div>`;
+  }
+
+  html += `
+    <div class="summary-section">
+      <div class="summary-title">💵 เงินสด / โอนเข้าบัญชี</div>`;
+
+  if (d.cashTank189 > 0) html += `<div class="summary-row"><span class="label">🪣 ถัง 18.9 ล. (${d.cashTank189} ถัง × ${d.cashTank189Price}฿)</span><span class="value">${d.cashTank189Baht.toLocaleString()} บาท</span></div>`;
+  if (d.cashReadyTank > 0) html += `<div class="summary-row"><span class="label">🫙 น้ำพร้อมถัง (${d.cashReadyTank} ถัง × ${d.cashReadyTankPrice}฿)</span><span class="value">${d.cashReadyTankBaht.toLocaleString()} บาท</span></div>`;
+  if (d.cash350 > 0) html += `<div class="summary-row"><span class="label">🧴 350 ml. (${d.cash350} แพ็ค × ${d.cash350Price}฿)</span><span class="value">${d.cash350Baht.toLocaleString()} บาท</span></div>`;
+  if (d.cash600 > 0) html += `<div class="summary-row"><span class="label">🧴 600 ml. (${d.cash600} แพ็ค × ${d.cash600Price}฿)</span><span class="value">${d.cash600Baht.toLocaleString()} บาท</span></div>`;
+
+  html += `<div class="summary-row"><span class="label">💰 รวมเงินสดทั้งสิ้น</span><span class="value cash-total">${totalCash.toLocaleString()} บาท</span></div>
+    </div>
+    <div class="total-box">
+      <div>
+        <div class="tl">📦 ถังทั้งหมด (เชื่อ)</div>
+        <div class="tv" style="color:var(--primary)">${totalCredit} ถัง</div>
+      </div>
+      <div style="text-align:right">
+        <div class="tl">💰 รวมเงินสด</div>
+        <div class="tv" style="color:var(--sky)">${totalCash.toLocaleString()} ฿</div>
+      </div>
+    </div>`;
+
+  if (d.note) {
+    html += `<div style="margin-top:12px;padding:10px 14px;background:#f8fafc;border-radius:12px;font-size:13px;color:#555">📝 ${d.note}</div>`;
+  }
+
+  document.getElementById('previewBody').innerHTML = html;
+  document.getElementById('previewOverlay').classList.add('active');
+}
+
+function closePreview() {
+  document.getElementById('previewOverlay').classList.remove('active');
+}
+
+// =================== SUBMIT ===================
+async function submitData() {
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spinner"></span> กำลังบันทึก...`;
+
+  const data = getData();
+  const bonus350 = Math.floor(data.credit350 / 10);
+  const bonus600 = Math.floor(data.credit600 / 10);
+  const totalCredit = data.creditService + data.creditNNS + data.creditSRP2;
+  const totalCash = data.cashTank189Baht + data.cashReadyTankBaht + data.cash350Baht + data.cash600Baht;
+  const dateStr = formatDateThai(data.reportDate);
+
+  let sheetOk = false, lineOk = false;
+
+  // 1. บันทึก Google Sheets
+  if (CONFIG.appsScriptUrl) {
+    try {
+      const resp = await fetch(CONFIG.appsScriptUrl, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+      const result = await resp.json();
+      sheetOk = result.success;
+    } catch (e) {
+      console.error('Sheets error:', e);
+    }
+  }
+
+  // 2. ส่ง LINE Notify
+  if (CONFIG.lineToken) {
+    const lineMsg = buildLineMessage(data, bonus350, bonus600, totalCredit, totalCash, dateStr);
+    try {
+      // ต้องใช้ proxy เนื่องจาก CORS ของ LINE Notify
+      // แนะนำส่งผ่าน Apps Script แทน (ดูหมายเหตุ)
+      lineOk = await sendViaAppsScript(data, lineMsg);
+    } catch (e) {
+      console.error('LINE error:', e);
+    }
+  }
+
+  closePreview();
+
+  let successMsg = '';
+  if (!CONFIG.appsScriptUrl && !CONFIG.lineToken) {
+    successMsg = '⚠️ ยังไม่ได้ตั้งค่า URL กรุณาตั้งค่าก่อนใช้งานจริง<br>(ทดสอบระบบสำเร็จ)';
+  } else {
+    successMsg = `📊 Google Sheets: ${sheetOk ? '✅ สำเร็จ' : '⚠️ ตรวจสอบ URL'}<br>📲 LINE: ${lineOk ? '✅ ส่งแล้ว' : '⚠️ ตรวจสอบ Token'}`;
+  }
+
+  document.getElementById('successSub').innerHTML = successMsg;
+  document.getElementById('successOverlay').classList.add('active');
+
+  btn.disabled = false;
+  btn.innerHTML = '✅ ยืนยัน &amp; บันทึก';
+}
+
+async function sendViaAppsScript(data, lineMsg) {
+  if (!CONFIG.appsScriptUrl) return false;
+  try {
+    const resp = await fetch(CONFIG.appsScriptUrl, {
+      method: 'POST',
+      body: JSON.stringify({ ...data, lineMessage: lineMsg, lineToken: CONFIG.lineToken })
+    });
+    const result = await resp.json();
+    return result.success;
+  } catch (e) { return false; }
+}
+
+function buildLineMessage(d, b350, b600, totalCredit, totalCash, dateStr) {
+  let msg = `\n📊 รายงานส่งน้ำดื่มประจำวัน\n📅 วันที่ ${dateStr}\n`;
+  msg += `${'─'.repeat(20)}\n`;
+  msg += `[ รายการเงินเชื่อ ]\n`;
+  msg += `🔹 กองพันบริการ : ${d.creditService} ถัง\n`;
+  msg += `🔹 กองพัน นนส. : ${d.creditNNS} ถัง\n`;
+  msg += `🔹 ศร.พัน.2 : ${d.creditSRP2} ถัง\n`;
+  if (d.credit350 > 0) msg += `🔸 350 ml. ${d.credit350} แพ็ค${b350 > 0 ? ` (แถม ${b350} แพ็ค)` : ''}\n`;
+  if (d.credit600 > 0) msg += `🔸 600 ml. ${d.credit600} แพ็ค${b600 > 0 ? ` (แถม ${b600} แพ็ค)` : ''}\n`;
+  msg += `${'─'.repeat(20)}\n`;
+  msg += `✅ รวมยอดถังทั้งหมด : ${totalCredit} ถัง\n`;
+  msg += `${'─'.repeat(20)}\n`;
+  msg += `[ รายการเงินสด / โอนเข้าบัญชี ]\n`;
+  if (d.cashTank189 > 0) msg += `📦 ถัง 18.9 ล. (${d.cashTank189} ถัง) : ${d.cashTank189Baht.toLocaleString()}.- บาท\n`;
+  if (d.cashReadyTank > 0) msg += `📦 น้ำพร้อมถัง (${d.cashReadyTank} ถัง) : ${d.cashReadyTankBaht.toLocaleString()}.- บาท\n`;
+  if (d.cash350 > 0) msg += `📦 350 ml. (${d.cash350} แพ็ค) : ${d.cash350Baht.toLocaleString()}.- บาท\n`;
+  if (d.cash600 > 0) msg += `📦 600 ml. (${d.cash600} แพ็ค) : ${d.cash600Baht.toLocaleString()}.- บาท\n`;
+  msg += `${'─'.repeat(20)}\n`;
+  msg += `💰 รวมเงินสดทั้งสิ้น : ${totalCash.toLocaleString()}.- บาท\n`;
+  if (d.note) msg += `📝 หมายเหตุ: ${d.note}\n`;
+  return msg;
+}
+
+function closeSuccess() {
+  document.getElementById('successOverlay').classList.remove('active');
+  resetForm();
+}
+
+function resetForm() {
+  ['creditService','creditNNS','creditSRP2','credit350','credit600',
+   'cashTank189','cashReadyTank','cash350','cash600'].forEach(id => {
+    document.getElementById(id).value = 0;
+  });
+  document.getElementById('note').value = '';
+  calcBonus('350'); calcBonus('600');
+  ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total'].forEach(id => {
+    document.getElementById(id).textContent = '0';
+  });
+}
+
+// =================== INIT ===================
+setDefaultDate();
+loadConfig();
+</script>
+</body>
+</html>
