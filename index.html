@@ -888,7 +888,26 @@
             <div class="input-wrapper">
               <input type="number" id="cash600" value="0" min="0" oninput="calcPrice('600cash')">
               <span class="unit">แพ็ค</span>
-            </div>
+            </div><div class="field-group">
+  <div class="field-label">🪣 ฝาถัง <span class="tag blue">สด/โอน</span></div>
+  <div class="input-row">
+    <div>
+      <div class="input-sub-label">จำนวน</div>
+      <div class="input-wrapper">
+        <input type="number" id="cashLid" value="0" min="0" oninput="calcPrice('lid')">
+        <span class="unit">ฝา</span>
+      </div>
+    </div>
+    <div>
+      <div class="input-sub-label">ราคา/ฝา (บาท)</div>
+      <div class="input-wrapper">
+        <input type="number" id="cashLidPrice" value="15" min="0" oninput="calcPrice('lid')">
+        <span class="unit">฿</span>
+      </div>
+    </div>
+  </div>
+  <div class="price-hint">รวม: <strong id="cashLidTotal">0</strong> บาท</div>
+</div>
           </div>
           <div>
             <div class="input-sub-label">ราคา/แพ็ค (บาท)</div>
@@ -1025,6 +1044,7 @@ function calcPrice(type) {
     'readyTank': { qty: 'cashReadyTank', price: 'cashReadyTankPrice', total: 'cashReadyTankTotal' },
     '350': { qty: 'cash350', price: 'cash350Price', total: 'cash350Total' },
     '600cash': { qty: 'cash600', price: 'cash600Price', total: 'cash600Total' },
+    'lid': { qty: 'cashLid', price: 'cashLidPrice', total: 'cashLidTotal' },
   };
   const ids = map[type];
   const qty = parseFloat(document.getElementById(ids.qty).value) || 0;
@@ -1054,6 +1074,9 @@ function getData() {
     cash600: g('cash600'),
     cash600Price: g('cash600Price'),
     cash600Baht: g('cash600') * g('cash600Price'),
+    cashLid: g('cashLid'),
+cashLidPrice: g('cashLidPrice'),
+cashLidBaht: g('cashLid') * g('cashLidPrice'),
     note: document.getElementById('note').value.trim()
   };
 }
@@ -1221,12 +1244,12 @@ function closeSuccess() {
 
 function resetForm() {
   ['creditService','creditNNS','creditSRP2','credit350','credit600',
-   'cashTank189','cashReadyTank','cash350','cash600'].forEach(id => {
+   'cashTank189','cashReadyTank','cash350','cash600','cashLid'].forEach(id => {
     document.getElementById(id).value = 0;
   });
   document.getElementById('note').value = '';
   calcBonus('350'); calcBonus('600');
-  ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total'].forEach(id => {
+  ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total','cashLidTotal'].forEach(id => {
     document.getElementById(id).textContent = '0';
   });
 }
