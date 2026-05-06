@@ -888,26 +888,7 @@
             <div class="input-wrapper">
               <input type="number" id="cash600" value="0" min="0" oninput="calcPrice('600cash')">
               <span class="unit">แพ็ค</span>
-            </div><div class="field-group">
-  <div class="field-label">🪣 ฝาถัง <span class="tag blue">สด/โอน</span></div>
-  <div class="input-row">
-    <div>
-      <div class="input-sub-label">จำนวน</div>
-      <div class="input-wrapper">
-        <input type="number" id="cashLid" value="0" min="0" oninput="calcPrice('lid')">
-        <span class="unit">ฝา</span>
-      </div>
-    </div>
-    <div>
-      <div class="input-sub-label">ราคา/ฝา (บาท)</div>
-      <div class="input-wrapper">
-        <input type="number" id="cashLidPrice" value="15" min="0" oninput="calcPrice('lid')">
-        <span class="unit">฿</span>
-      </div>
-    </div>
-  </div>
-  <div class="price-hint">รวม: <strong id="cashLidTotal">0</strong> บาท</div>
-</div>
+            </div>
           </div>
           <div>
             <div class="input-sub-label">ราคา/แพ็ค (บาท)</div>
@@ -920,8 +901,26 @@
         <div class="price-hint">รวม: <strong id="cash600Total">0</strong> บาท</div>
       </div>
 
-    </div>
-  </div>
+      <div class="field-group">
+        <div class="field-label">🪣 ฝาถัง <span class="tag blue">สด/โอน</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวน</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashLid" value="0" min="0" oninput="calcPrice('lid')">
+              <span class="unit">ฝา</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">ราคา/ฝา (บาท)</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashLidPrice" value="15" min="0" oninput="calcPrice('lid')">
+              <span class="unit">฿</span>
+            </div>
+          </div>
+        </div>
+        <div class="price-hint">รวม: <strong id="cashLidTotal">0</strong> บาท</div>
+      </div>
 
   <!-- Note -->
   <div class="note-card">
