@@ -186,6 +186,17 @@
 
   .field-group:last-child { border-bottom: none; }
 
+  /* รายการพิเศษ — เล็กกว่ารายการหลัก */
+  .field-group.special {
+    padding: 8px 0 8px 10px;
+    border-bottom: 1px dashed #e0f2f1;
+    background: #fafffe;
+    border-radius: 8px;
+    margin-top: 2px;
+  }
+
+  .field-group.special:last-child { border-bottom: none; }
+
   .field-label {
     font-size: 13px;
     font-weight: 500;
@@ -194,6 +205,13 @@
     display: flex;
     align-items: center;
     gap: 6px;
+  }
+
+  /* label รายการพิเศษ */
+  .field-label.small {
+    font-size: 11.5px;
+    color: #7a9e92;
+    margin-bottom: 5px;
   }
 
   .field-label .tag {
@@ -210,11 +228,24 @@
     color: var(--sky);
   }
 
+  .field-label .tag.special-tag {
+    background: #fff3e0;
+    color: #bf6c00;
+    font-size: 9px;
+    padding: 1px 6px;
+  }
+
   .input-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     align-items: end;
+  }
+
+  /* input-row เล็กลงสำหรับรายการพิเศษ */
+  .input-row.small-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 
   .input-wrapper { position: relative; }
@@ -249,6 +280,26 @@
     transition: all 0.2s;
     outline: none;
     -moz-appearance: textfield;
+  }
+
+  /* input เล็กสำหรับรายการพิเศษ */
+  input.small-input {
+    padding: 8px 36px 8px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+    border-color: #c8e6c9;
+    background: #f1faf6;
+  }
+
+  input.small-input:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 200, 160, 0.08);
+  }
+
+  .input-wrapper .unit.small-unit {
+    font-size: 10px;
+    right: 10px;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -430,6 +481,14 @@
   .summary-row .value.bonus { color: var(--gold); }
   .summary-row .value.total { color: var(--primary); font-size: 16px; }
   .summary-row .value.cash-total { color: var(--sky); font-size: 16px; }
+
+  /* summary row พิเศษ */
+  .summary-row.special-row {
+    padding: 4px 0 4px 12px;
+    font-size: 13px;
+    border-bottom: 1px dashed #f5f5f5;
+    background: #fafffe;
+  }
 
   .total-box {
     background: linear-gradient(135deg, var(--emerald-light), var(--sky-light));
@@ -690,6 +749,7 @@
 
       <div class="divider"></div>
 
+      <!-- 350 ml รายการหลัก (มีของแถม) -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 350 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
         <div class="input-row">
@@ -707,6 +767,16 @@
         </div>
       </div>
 
+      <!-- ✅ 350 ml รายการพิเศษ (ไม่มีของแถม) -->
+      <div class="field-group special">
+        <div class="field-label small">↳ 🧴 350 ml. <span class="tag special-tag">พิเศษ / ไม่มีแถม</span></div>
+        <div class="input-wrapper">
+          <input type="number" id="credit350Special" value="0" min="0" class="small-input" placeholder="0">
+          <span class="unit small-unit">แพ็ค</span>
+        </div>
+      </div>
+
+      <!-- 600 ml รายการหลัก (มีของแถม) -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 600 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
         <div class="input-row">
@@ -721,6 +791,15 @@
             <div class="input-sub-label">🎁 ของแถม</div>
             <div class="bonus-badge" id="bonus600"><span class="gift-icon">🎁</span> — แพ็ค</div>
           </div>
+        </div>
+      </div>
+
+      <!-- ✅ 600 ml รายการพิเศษ (ไม่มีของแถม) -->
+      <div class="field-group special">
+        <div class="field-label small">↳ 🧴 600 ml. <span class="tag special-tag">พิเศษ / ไม่มีแถม</span></div>
+        <div class="input-wrapper">
+          <input type="number" id="credit600Special" value="0" min="0" class="small-input" placeholder="0">
+          <span class="unit small-unit">แพ็ค</span>
         </div>
       </div>
 
@@ -804,7 +883,7 @@
         <div class="price-hint">รวม: <strong id="cash350Total">0</strong> บาท</div>
       </div>
 
-      <!-- ✅ แก้จุดที่ 1: 600 ml — ราคา/แพ็ค กลับมาอยู่ถูกตำแหน่ง -->
+      <!-- 600 ml -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 600 ml. <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -826,7 +905,7 @@
         <div class="price-hint">รวม: <strong id="cash600Total">0</strong> บาท</div>
       </div>
 
-      <!-- ✅ แก้จุดที่ 1: ฝาถัง — ราคา/ฝา ขนาดเท่ากับด้านบน -->
+      <!-- ฝาถัง -->
       <div class="field-group">
         <div class="field-label">🪣 ฝาถัง <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -983,28 +1062,30 @@ function calcPrice(type) {
 function getData() {
   const g = id => parseFloat(document.getElementById(id).value) || 0;
   return {
-    reportDate:         document.getElementById('reportDate').value,
-    creditService:      g('creditService'),
-    creditNNS:          g('creditNNS'),
-    creditSRP2:         g('creditSRP2'),
-    credit350:          g('credit350'),
-    credit600:          g('credit600'),
-    cashTank189:        g('cashTank189'),
-    cashTank189Price:   g('cashTank189Price'),
-    cashTank189Baht:    g('cashTank189')   * g('cashTank189Price'),
-    cashReadyTank:      g('cashReadyTank'),
-    cashReadyTankPrice: g('cashReadyTankPrice'),
-    cashReadyTankBaht:  g('cashReadyTank') * g('cashReadyTankPrice'),
-    cash350:            g('cash350'),
-    cash350Price:       g('cash350Price'),
-    cash350Baht:        g('cash350')       * g('cash350Price'),
-    cash600:            g('cash600'),
-    cash600Price:       g('cash600Price'),
-    cash600Baht:        g('cash600')       * g('cash600Price'),
-    cashLid:            g('cashLid'),
-    cashLidPrice:       g('cashLidPrice'),
-    cashLidBaht:        g('cashLid')       * g('cashLidPrice'),
-    note:               document.getElementById('note').value.trim()
+    reportDate:           document.getElementById('reportDate').value,
+    creditService:        g('creditService'),
+    creditNNS:            g('creditNNS'),
+    creditSRP2:           g('creditSRP2'),
+    credit350:            g('credit350'),
+    credit350Special:     g('credit350Special'),   // ✅ รายการพิเศษ
+    credit600:            g('credit600'),
+    credit600Special:     g('credit600Special'),   // ✅ รายการพิเศษ
+    cashTank189:          g('cashTank189'),
+    cashTank189Price:     g('cashTank189Price'),
+    cashTank189Baht:      g('cashTank189')   * g('cashTank189Price'),
+    cashReadyTank:        g('cashReadyTank'),
+    cashReadyTankPrice:   g('cashReadyTankPrice'),
+    cashReadyTankBaht:    g('cashReadyTank') * g('cashReadyTankPrice'),
+    cash350:              g('cash350'),
+    cash350Price:         g('cash350Price'),
+    cash350Baht:          g('cash350')       * g('cash350Price'),
+    cash600:              g('cash600'),
+    cash600Price:         g('cash600Price'),
+    cash600Baht:          g('cash600')       * g('cash600Price'),
+    cashLid:              g('cashLid'),
+    cashLidPrice:         g('cashLidPrice'),
+    cashLidBaht:          g('cashLid')       * g('cashLidPrice'),
+    note:                 document.getElementById('note').value.trim()
   };
 }
 
@@ -1027,15 +1108,27 @@ function previewData() {
       <div class="summary-row"><span class="label">✅ รวมถังเชื่อ</span><span class="value total">${totalCredit} ถัง</span></div>
     </div>`;
 
-  if (d.credit350 > 0 || d.credit600 > 0) {
+  if (d.credit350 > 0 || d.credit600 > 0 || d.credit350Special > 0 || d.credit600Special > 0) {
     html += `
     <div class="summary-section">
-      <div class="summary-title">🧴 เงินเชื่อ - บรรจุภัณฑ์</div>
-      <div class="summary-row"><span class="label">350 ml.</span><span class="value">${d.credit350} แพ็ค</span></div>
-      ${bonus350 > 0 ? `<div class="summary-row"><span class="label">🎁 แถม 350 ml.</span><span class="value bonus">${bonus350} แพ็ค</span></div>` : ''}
-      <div class="summary-row"><span class="label">600 ml.</span><span class="value">${d.credit600} แพ็ค</span></div>
-      ${bonus600 > 0 ? `<div class="summary-row"><span class="label">🎁 แถม 600 ml.</span><span class="value bonus">${bonus600} แพ็ค</span></div>` : ''}
-    </div>`;
+      <div class="summary-title">🧴 เงินเชื่อ - บรรจุภัณฑ์</div>`;
+
+    if (d.credit350 > 0) {
+      html += `<div class="summary-row"><span class="label">350 ml.</span><span class="value">${d.credit350} แพ็ค</span></div>`;
+      if (bonus350 > 0) html += `<div class="summary-row"><span class="label">🎁 แถม 350 ml.</span><span class="value bonus">${bonus350} แพ็ค</span></div>`;
+    }
+    if (d.credit350Special > 0) {
+      html += `<div class="summary-row special-row"><span class="label" style="color:#7a9e92">↳ 350 ml. พิเศษ</span><span class="value" style="font-size:13px">${d.credit350Special} แพ็ค</span></div>`;
+    }
+    if (d.credit600 > 0) {
+      html += `<div class="summary-row"><span class="label">600 ml.</span><span class="value">${d.credit600} แพ็ค</span></div>`;
+      if (bonus600 > 0) html += `<div class="summary-row"><span class="label">🎁 แถม 600 ml.</span><span class="value bonus">${bonus600} แพ็ค</span></div>`;
+    }
+    if (d.credit600Special > 0) {
+      html += `<div class="summary-row special-row"><span class="label" style="color:#7a9e92">↳ 600 ml. พิเศษ</span><span class="value" style="font-size:13px">${d.credit600Special} แพ็ค</span></div>`;
+    }
+
+    html += `</div>`;
   }
 
   html += `
@@ -1062,7 +1155,6 @@ function previewData() {
       </div>
     </div>`;
 
-  // ✅ แก้จุดที่ 2: แสดงหมายเหตุใน preview เสมอเมื่อมีข้อความ
   if (d.note) {
     html += `<div style="margin-top:12px;padding:10px 14px;background:#f8fafc;border-radius:12px;font-size:13px;color:#555">📝 ${d.note}</div>`;
   }
@@ -1116,7 +1208,7 @@ function closeSuccess() {
 }
 
 function resetForm() {
-  ['creditService','creditNNS','creditSRP2','credit350','credit600',
+  ['creditService','creditNNS','creditSRP2','credit350','credit350Special','credit600','credit600Special',
    'cashTank189','cashReadyTank','cash350','cash600','cashLid'].forEach(id => {
     document.getElementById(id).value = 0;
   });
