@@ -927,6 +927,28 @@
         <div class="price-hint">รวม: <strong id="cashLidTotal">0</strong> บาท</div>
       </div>
 
+      <!-- ถังเปล่า -->
+      <div class="field-group">
+        <div class="field-label">🛢️ ถังเปล่า <span class="tag blue">สด/โอน</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวน</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashEmptyTank" value="0" min="0" oninput="calcPrice('emptyTank')">
+              <span class="unit">ถัง</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">ราคา/ถัง (บาท)</div>
+            <div class="input-wrapper">
+              <input type="number" id="cashEmptyTankPrice" value="100" min="0" oninput="calcPrice('emptyTank')">
+              <span class="unit">฿</span>
+            </div>
+          </div>
+        </div>
+        <div class="price-hint">รวม: <strong id="cashEmptyTankTotal">0</strong> บาท</div>
+      </div>
+
     </div>
   </div>
 
@@ -1051,6 +1073,7 @@ function calcPrice(type) {
     '350':       { qty: 'cash350',       price: 'cash350Price',       total: 'cash350Total'       },
     '600cash':   { qty: 'cash600',       price: 'cash600Price',       total: 'cash600Total'       },
     'lid':       { qty: 'cashLid',       price: 'cashLidPrice',       total: 'cashLidTotal'       },
+    'emptyTank': { qty: 'cashEmptyTank', price: 'cashEmptyTankPrice', total: 'cashEmptyTankTotal' },
   };
   const ids   = map[type];
   const qty   = parseFloat(document.getElementById(ids.qty).value)   || 0;
@@ -1085,6 +1108,9 @@ function getData() {
     cashLid:              g('cashLid'),
     cashLidPrice:         g('cashLidPrice'),
     cashLidBaht:          g('cashLid')       * g('cashLidPrice'),
+    cashEmptyTank:        g('cashEmptyTank'),
+    cashEmptyTankPrice:   g('cashEmptyTankPrice'),
+    cashEmptyTankBaht:    g('cashEmptyTank') * g('cashEmptyTankPrice'),
     note:                 document.getElementById('note').value.trim()
   };
 }
@@ -1095,7 +1121,7 @@ function previewData() {
   const bonus350 = Math.floor(d.credit350 / 10);
   const bonus600 = Math.floor(d.credit600 / 10);
   const totalCredit = d.creditService + d.creditNNS + d.creditSRP2;
-  const totalCash   = d.cashTank189Baht + d.cashReadyTankBaht + d.cash350Baht + d.cash600Baht + (d.cashLidBaht || 0);
+  const totalCash   = d.cashTank189Baht + d.cashReadyTankBaht + d.cash350Baht + d.cash600Baht + (d.cashLidBaht || 0) + (d.cashEmptyTankBaht || 0);
 
   document.getElementById('previewDate').textContent = `📅 ${formatDateThai(d.reportDate)}`;
 
@@ -1140,6 +1166,7 @@ function previewData() {
   if (d.cash350 > 0)       html += `<div class="summary-row"><span class="label">🧴 350 ml. (${d.cash350} แพ็ค × ${d.cash350Price}฿)</span><span class="value">${d.cash350Baht.toLocaleString()} บาท</span></div>`;
   if (d.cash600 > 0)       html += `<div class="summary-row"><span class="label">🧴 600 ml. (${d.cash600} แพ็ค × ${d.cash600Price}฿)</span><span class="value">${d.cash600Baht.toLocaleString()} บาท</span></div>`;
   if (d.cashLid > 0)       html += `<div class="summary-row"><span class="label">🪣 ฝาถัง (${d.cashLid} ฝา × ${d.cashLidPrice}฿)</span><span class="value">${(d.cashLidBaht||0).toLocaleString()} บาท</span></div>`;
+  if (d.cashEmptyTank > 0) html += `<div class="summary-row"><span class="label">🛢️ ถังเปล่า (${d.cashEmptyTank} ถัง × ${d.cashEmptyTankPrice}฿)</span><span class="value">${(d.cashEmptyTankBaht||0).toLocaleString()} บาท</span></div>`;
 
   html += `
       <div class="summary-row"><span class="label">💰 รวมเงินสดทั้งสิ้น</span><span class="value cash-total">${totalCash.toLocaleString()} บาท</span></div>
@@ -1209,13 +1236,13 @@ function closeSuccess() {
 
 function resetForm() {
   ['creditService','creditNNS','creditSRP2','credit350','credit350Special','credit600','credit600Special',
-   'cashTank189','cashReadyTank','cash350','cash600','cashLid'].forEach(id => {
+   'cashTank189','cashReadyTank','cash350','cash600','cashLid','cashEmptyTank'].forEach(id => {
     document.getElementById(id).value = 0;
   });
   document.getElementById('note').value = '';
   calcBonus('350');
   calcBonus('600');
-  ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total','cashLidTotal'].forEach(id => {
+  ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total','cashLidTotal','cashEmptyTankTotal'].forEach(id => {
     document.getElementById(id).textContent = '0';
   });
 }
