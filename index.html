@@ -768,11 +768,11 @@
       </div>
 
       <!-- ✅ 350 ml รายการพิเศษ (ไม่มีของแถม) -->
-      <div class="field-group special">
-        <div class="field-label small">↳ 🧴 350 ml. <span class="tag special-tag">พิเศษ / ไม่มีแถม</span></div>
+      <div class="field-group">
+        <div class="field-label" style="color:#0a7c5c;font-weight:600;">🔸 น้ำดื่ม 350 ml. <span class="tag">แพ็ค (พิเศษ)</span></div>
         <div class="input-wrapper">
-          <input type="number" id="credit350Special" value="0" min="0" class="small-input" placeholder="0">
-          <span class="unit small-unit">แพ็ค</span>
+          <input type="number" id="credit350Special" value="0" min="0" placeholder="0">
+          <span class="unit">แพ็ค</span>
         </div>
       </div>
 
@@ -795,11 +795,11 @@
       </div>
 
       <!-- ✅ 600 ml รายการพิเศษ (ไม่มีของแถม) -->
-      <div class="field-group special">
-        <div class="field-label small">↳ 🧴 600 ml. <span class="tag special-tag">พิเศษ / ไม่มีแถม</span></div>
+      <div class="field-group">
+        <div class="field-label" style="color:#0a7c5c;font-weight:600;">🔸 น้ำดื่ม 600 ml. <span class="tag">แพ็ค (พิเศษ)</span></div>
         <div class="input-wrapper">
-          <input type="number" id="credit600Special" value="0" min="0" class="small-input" placeholder="0">
-          <span class="unit small-unit">แพ็ค</span>
+          <input type="number" id="credit600Special" value="0" min="0" placeholder="0">
+          <span class="unit">แพ็ค</span>
         </div>
       </div>
 
@@ -1144,14 +1144,14 @@ function previewData() {
       if (bonus350 > 0) html += `<div class="summary-row"><span class="label">🎁 แถม 350 ml.</span><span class="value bonus">${bonus350} แพ็ค</span></div>`;
     }
     if (d.credit350Special > 0) {
-      html += `<div class="summary-row special-row"><span class="label" style="color:#7a9e92">↳ 350 ml. พิเศษ</span><span class="value" style="font-size:13px">${d.credit350Special} แพ็ค</span></div>`;
+      html += `<div class="summary-row"><span class="label" style="color:#0a7c5c;font-weight:600;">🔸 350 ml. (พิเศษ)</span><span class="value">${d.credit350Special} แพ็ค</span></div>`;
     }
     if (d.credit600 > 0) {
       html += `<div class="summary-row"><span class="label">600 ml.</span><span class="value">${d.credit600} แพ็ค</span></div>`;
       if (bonus600 > 0) html += `<div class="summary-row"><span class="label">🎁 แถม 600 ml.</span><span class="value bonus">${bonus600} แพ็ค</span></div>`;
     }
     if (d.credit600Special > 0) {
-      html += `<div class="summary-row special-row"><span class="label" style="color:#7a9e92">↳ 600 ml. พิเศษ</span><span class="value" style="font-size:13px">${d.credit600Special} แพ็ค</span></div>`;
+      html += `<div class="summary-row"><span class="label" style="color:#0a7c5c;font-weight:600;">🔸 600 ml. (พิเศษ)</span><span class="value">${d.credit600Special} แพ็ค</span></div>`;
     }
 
     html += `</div>`;
