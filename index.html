@@ -747,6 +747,14 @@
         </div>
       </div>
 
+      <div class="field-group">
+        <div class="field-label">🏛️ ศร.พัน.1 <span class="tag">ถัง 18.9 ล.</span></div>
+        <div class="input-wrapper">
+          <input type="number" id="creditSRP1" value="0" min="0" placeholder="0">
+          <span class="unit">ถัง</span>
+        </div>
+      </div>
+
       <div class="divider"></div>
 
       <!-- 350 ml — กรอกจำนวน + ของแถมด้วยมือ -->
@@ -764,6 +772,27 @@
             <div class="input-sub-label">🎁 ของแถม (แพ็ค)</div>
             <div class="input-wrapper">
               <input type="number" id="bonus350" value="0" min="0" placeholder="0">
+              <span class="unit">แพ็ค</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 500 ml — กรอกจำนวน + ของแถมด้วยมือ -->
+      <div class="field-group">
+        <div class="field-label">🧴 น้ำดื่ม 500 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวนแพ็ค</div>
+            <div class="input-wrapper">
+              <input type="number" id="credit500" value="0" min="0" placeholder="0">
+              <span class="unit">แพ็ค</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">🎁 ของแถม (แพ็ค)</div>
+            <div class="input-wrapper">
+              <input type="number" id="bonus500" value="0" min="0" placeholder="0">
               <span class="unit">แพ็ค</span>
             </div>
           </div>
@@ -1063,8 +1092,11 @@ function getData() {
     creditService:        g('creditService'),
     creditNNS:            g('creditNNS'),
     creditSRP2:           g('creditSRP2'),
+    creditSRP1:           g('creditSRP1'),
     credit350:            g('credit350'),
     bonus350:             g('bonus350'),
+    credit500:            g('credit500'),
+    bonus500:             g('bonus500'),
     credit600:            g('credit600'),
     bonus600:             g('bonus600'),
     cashTank189:          g('cashTank189'),
@@ -1094,7 +1126,7 @@ function previewData() {
   const d        = getData();
   const bonus350 = d.bonus350 || 0;
   const bonus600 = d.bonus600 || 0;
-  const totalCredit = d.creditService + d.creditNNS + d.creditSRP2;
+  const totalCredit = d.creditService + d.creditNNS + d.creditSRP2 + d.creditSRP1;
   const totalCash   = d.cashTank189Baht + d.cashReadyTankBaht + d.cash350Baht + d.cash600Baht + (d.cashLidBaht || 0) + (d.cashEmptyTankBaht || 0);
 
   document.getElementById('previewDate').textContent = `📅 ${formatDateThai(d.reportDate)}`;
@@ -1105,16 +1137,21 @@ function previewData() {
       <div class="summary-row"><span class="label">🏢 กองพันบริการ</span><span class="value">${d.creditService} ถัง</span></div>
       <div class="summary-row"><span class="label">🏫 กองพัน นนส.</span><span class="value">${d.creditNNS} ถัง</span></div>
       <div class="summary-row"><span class="label">🏛️ ศร.พัน.2</span><span class="value">${d.creditSRP2} ถัง</span></div>
+      <div class="summary-row"><span class="label">🏛️ ศร.พัน.1</span><span class="value">${d.creditSRP1} ถัง</span></div>
       <div class="summary-row"><span class="label">✅ รวมถังเชื่อ</span><span class="value total">${totalCredit} ถัง</span></div>
     </div>`;
 
-  if (d.credit350 > 0 || d.credit600 > 0) {
+  if (d.credit350 > 0 || d.credit500 > 0 || d.credit600 > 0) {
     html += `
     <div class="summary-section">
       <div class="summary-title">🧴 เงินเชื่อ - บรรจุภัณฑ์</div>`;
 
     if (d.credit350 > 0) {
       html += `<div class="summary-row"><span class="label">🔸 350 ml.</span><span class="value">${d.credit350} แพ็ค (แถม ${bonus350} แพ็ค)</span></div>`;
+    }
+    if (d.credit500 > 0) {
+      const bonus500 = d.bonus500 || 0;
+      html += `<div class="summary-row"><span class="label">🔸 500 ml.</span><span class="value">${d.credit500} แพ็ค (แถม ${bonus500} แพ็ค)</span></div>`;
     }
     if (d.credit600 > 0) {
       html += `<div class="summary-row"><span class="label">🔸 600 ml.</span><span class="value">${d.credit600} แพ็ค (แถม ${bonus600} แพ็ค)</span></div>`;
@@ -1201,7 +1238,7 @@ function closeSuccess() {
 }
 
 function resetForm() {
-  ['creditService','creditNNS','creditSRP2','credit350','bonus350','credit600','bonus600',
+  ['creditService','creditNNS','creditSRP2','creditSRP1','credit350','bonus350','credit500','bonus500','credit600','bonus600',
    'cashTank189','cashReadyTank','cash350','cash600','cashLid','cashEmptyTank'].forEach(id => {
     document.getElementById(id).value = 0;
   });
