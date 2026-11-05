@@ -43,636 +43,272 @@
     pointer-events: none;
   }
 
-  .app-wrapper {
-    max-width: 480px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
+  .app-wrapper { max-width: 480px; margin: 0 auto; position: relative; z-index: 1; }
 
-  .header {
-    text-align: center;
-    padding: 28px 20px 20px;
-    animation: slideDown 0.6s ease;
-  }
+  .header { text-align: center; padding: 28px 20px 20px; animation: slideDown 0.6s ease; }
 
   .header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 50px;
-    padding: 6px 18px;
-    margin-bottom: 12px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.9);
-    letter-spacing: 0.5px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 50px;
+    padding: 6px 18px; margin-bottom: 12px; font-size: 12px;
+    color: rgba(255,255,255,0.9); letter-spacing: 0.5px;
   }
 
-  .header h1 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    line-height: 1.2;
-  }
-
+  .header h1 { font-size: 26px; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.2; }
   .header h1 span { color: #7fffdf; }
-
-  .header-sub {
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-    margin-top: 6px;
-  }
-
-  .drop-icon {
-    font-size: 36px;
-    animation: dropFloat 3s ease-in-out infinite;
-    display: block;
-    margin-bottom: 8px;
-  }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+  .drop-icon { font-size: 36px; animation: dropFloat 3s ease-in-out infinite; display: block; margin-bottom: 8px; }
 
   .date-card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 20px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+    padding: 16px 20px; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
     animation: fadeUp 0.5s ease 0.1s both;
   }
-
   .date-icon { font-size: 24px; }
-
-  .date-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-    font-weight: 400;
-  }
-
+  .date-label { font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 400; }
   .date-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: 'Prompt', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    flex: 1;
+    background: transparent; border: none; outline: none;
+    font-family: 'Prompt', sans-serif; font-size: 16px; font-weight: 600;
+    color: #fff; cursor: pointer; flex: 1;
   }
-
-  .date-input::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    opacity: 0.7;
-    cursor: pointer;
-  }
+  .date-input::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.7; cursor: pointer; }
 
   .card {
-    background: var(--card);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    margin-bottom: 16px;
+    background: var(--card); border-radius: 24px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 16px;
     animation: fadeUp 0.5s ease 0.2s both;
   }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 20px 14px;
-    position: relative;
-  }
-
+  .section-header { display: flex; align-items: center; gap: 10px; padding: 16px 20px 14px; position: relative; }
   .section-header.credit { background: linear-gradient(135deg, #0a7c5c, #13a87a); }
   .section-header.cash   { background: linear-gradient(135deg, #0891b2, #06b6d4); }
 
   .section-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
+    width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
   }
-
-  .section-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.3px;
-  }
-
-  .section-subtitle {
-    font-size: 11px;
-    color: rgba(255,255,255,0.7);
-    font-weight: 400;
-  }
-
+  .section-title { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
+  .section-subtitle { font-size: 11px; color: rgba(255,255,255,0.7); font-weight: 400; }
   .section-body { padding: 8px 16px 16px; }
 
-  .field-group {
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f9f6;
-  }
-
+  .field-group { padding: 12px 0; border-bottom: 1px solid #f0f9f6; }
   .field-group:last-child { border-bottom: none; }
 
-  /* รายการพิเศษ — เล็กกว่ารายการหลัก */
   .field-group.special {
-    padding: 8px 0 8px 10px;
-    border-bottom: 1px dashed #e0f2f1;
-    background: #fafffe;
-    border-radius: 8px;
-    margin-top: 2px;
+    padding: 8px 0 8px 10px; border-bottom: 1px dashed #e0f2f1;
+    background: #fafffe; border-radius: 8px; margin-top: 2px;
   }
-
   .field-group.special:last-child { border-bottom: none; }
 
   .field-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 13px; font-weight: 500; color: var(--text-muted);
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
   }
-
-  /* label รายการพิเศษ */
-  .field-label.small {
-    font-size: 11.5px;
-    color: #7a9e92;
-    margin-bottom: 5px;
-  }
-
+  .field-label.small { font-size: 11.5px; color: #7a9e92; margin-bottom: 5px; }
   .field-label .tag {
-    background: var(--emerald-light);
-    color: var(--primary);
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 600;
+    background: var(--emerald-light); color: var(--primary);
+    font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600;
   }
+  .field-label .tag.blue { background: var(--sky-light); color: var(--sky); }
+  .field-label .tag.special-tag { background: #fff3e0; color: #bf6c00; font-size: 9px; padding: 1px 6px; }
 
-  .field-label .tag.blue {
-    background: var(--sky-light);
-    color: var(--sky);
-  }
-
-  .field-label .tag.special-tag {
-    background: #fff3e0;
-    color: #bf6c00;
-    font-size: 9px;
-    padding: 1px 6px;
-  }
-
-  .input-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    align-items: end;
-  }
-
-  /* input-row เล็กลงสำหรับรายการพิเศษ */
-  .input-row.small-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
+  .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+  .input-row.small-row { grid-template-columns: 1fr; gap: 6px; }
 
   .input-wrapper { position: relative; }
-
   .input-wrapper .unit {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 11px;
-    color: #aaa;
-    font-weight: 500;
-    pointer-events: none;
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 11px; color: #aaa; font-weight: 500; pointer-events: none;
   }
-
-  .input-sub-label {
-    font-size: 11px;
-    color: #999;
-    margin-bottom: 5px;
-  }
+  .input-sub-label { font-size: 11px; color: #999; margin-bottom: 5px; }
 
   input[type="number"], input[type="text"] {
-    width: 100%;
-    padding: 12px 40px 12px 14px;
-    border: 2px solid #e8f5e9;
-    border-radius: 12px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text);
-    background: #f9fffe;
-    transition: all 0.2s;
-    outline: none;
-    -moz-appearance: textfield;
+    width: 100%; padding: 12px 40px 12px 14px;
+    border: 2px solid #e8f5e9; border-radius: 12px;
+    font-family: 'Prompt', sans-serif; font-size: 16px; font-weight: 600;
+    color: var(--text); background: #f9fffe; transition: all 0.2s;
+    outline: none; -moz-appearance: textfield;
   }
 
-  /* input เล็กสำหรับรายการพิเศษ */
   input.small-input {
-    padding: 8px 36px 8px 12px;
-    font-size: 14px;
-    border-radius: 10px;
-    border-color: #c8e6c9;
-    background: #f1faf6;
+    padding: 8px 36px 8px 12px; font-size: 14px; border-radius: 10px;
+    border-color: #c8e6c9; background: #f1faf6;
   }
-
-  input.small-input:focus {
-    border-color: var(--accent);
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(0, 200, 160, 0.08);
-  }
-
-  .input-wrapper .unit.small-unit {
-    font-size: 10px;
-    right: 10px;
-  }
+  input.small-input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(0, 200, 160, 0.08); }
+  .input-wrapper .unit.small-unit { font-size: 10px; right: 10px; }
 
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
 
   input[type="number"]:focus, input[type="text"]:focus {
-    border-color: var(--accent);
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(0, 200, 160, 0.1);
+    border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(0, 200, 160, 0.1);
   }
 
   .bonus-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    display: flex; align-items: center; gap: 6px;
     background: linear-gradient(135deg, #fff8e1, #fffde7);
-    border: 1.5px solid #fcd34d;
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #92400e;
-    font-weight: 600;
-    min-height: 46px;
+    border: 1.5px solid #fcd34d; border-radius: 10px; padding: 10px 14px;
+    font-size: 13px; color: #92400e; font-weight: 600; min-height: 46px;
   }
-
   .bonus-badge .gift-icon { font-size: 18px; }
 
   .note-card {
-    background: var(--card);
-    border-radius: 20px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    animation: fadeUp 0.5s ease 0.35s both;
+    background: var(--card); border-radius: 20px; padding: 16px; margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); animation: fadeUp 0.5s ease 0.35s both;
   }
-
   .note-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--text-muted);
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
   }
 
   textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 2px solid #e8f5e9;
-    border-radius: 12px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    background: #f9fffe;
-    resize: none;
-    outline: none;
-    transition: all 0.2s;
-    height: 70px;
+    width: 100%; padding: 12px 14px; border: 2px solid #e8f5e9; border-radius: 12px;
+    font-family: 'Prompt', sans-serif; font-size: 14px; color: var(--text);
+    background: #f9fffe; resize: none; outline: none; transition: all 0.2s; height: 70px;
   }
-
-  textarea:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(0, 200, 160, 0.1);
-  }
+  textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(0, 200, 160, 0.1); }
 
   .submit-btn {
-    width: 100%;
-    padding: 18px;
+    width: 100%; padding: 18px;
     background: linear-gradient(135deg, var(--primary-light), var(--sky));
-    border: none;
-    border-radius: 20px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: #fff;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-    box-shadow: 0 8px 30px rgba(10, 124, 92, 0.4);
-    animation: fadeUp 0.5s ease 0.4s both;
+    border: none; border-radius: 20px; font-family: 'Prompt', sans-serif;
+    font-size: 17px; font-weight: 700; color: #fff; cursor: pointer;
+    letter-spacing: 0.5px; position: relative; overflow: hidden; transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(10, 124, 92, 0.4); animation: fadeUp 0.5s ease 0.4s both;
   }
-
-  .submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(10, 124, 92, 0.5);
-  }
-
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(10, 124, 92, 0.5); }
   .submit-btn:active { transform: translateY(0); }
-
   .submit-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
     animation: shimmer 2.5s infinite;
   }
 
   .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,20,15,0.6);
-    backdrop-filter: blur(6px);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
+    position: fixed; inset: 0; background: rgba(0,20,15,0.6); backdrop-filter: blur(6px);
+    z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
   }
-
   .overlay.active { opacity: 1; pointer-events: all; }
 
   .modal {
-    background: #fff;
-    border-radius: 28px;
-    width: 100%;
-    max-width: 420px;
-    overflow: hidden;
+    background: #fff; border-radius: 28px; width: 100%; max-width: 420px; overflow: hidden;
     transform: translateY(30px) scale(0.95);
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 0 30px 80px rgba(0,0,0,0.3);
   }
-
   .overlay.active .modal { transform: translateY(0) scale(1); }
 
-  .modal-header {
-    background: linear-gradient(135deg, #0a7c5c, #0891b2);
-    padding: 20px 24px;
-    text-align: center;
-  }
-
+  .modal-header { background: linear-gradient(135deg, #0a7c5c, #0891b2); padding: 20px 24px; text-align: center; }
   .modal-header h2 { font-size: 18px; font-weight: 700; color: #fff; }
   .modal-header p  { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 4px; }
-
-  .modal-body {
-    padding: 20px 24px;
-    max-height: 60vh;
-    overflow-y: auto;
-  }
+  .modal-body { padding: 20px 24px; max-height: 60vh; overflow-y: auto; }
 
   .summary-section { margin-bottom: 16px; }
-
   .summary-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--primary);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
   }
-
-  .summary-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--border), transparent);
-  }
+  .summary-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--border), transparent); }
 
   .summary-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 7px 0;
-    border-bottom: 1px dashed #f0f9f6;
-    font-size: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 7px 0; border-bottom: 1px dashed #f0f9f6; font-size: 14px;
   }
-
   .summary-row:last-child { border-bottom: none; }
   .summary-row .label { color: #555; }
   .summary-row .value { font-weight: 700; color: var(--text); }
   .summary-row .value.bonus { color: var(--gold); }
   .summary-row .value.total { color: var(--primary); font-size: 16px; }
   .summary-row .value.cash-total { color: var(--sky); font-size: 16px; }
-
-  /* summary row พิเศษ */
-  .summary-row.special-row {
-    padding: 4px 0 4px 12px;
-    font-size: 13px;
-    border-bottom: 1px dashed #f5f5f5;
-    background: #fafffe;
-  }
+  .summary-row.special-row { padding: 4px 0 4px 12px; font-size: 13px; border-bottom: 1px dashed #f5f5f5; background: #fafffe; }
 
   .total-box {
     background: linear-gradient(135deg, var(--emerald-light), var(--sky-light));
-    border-radius: 16px;
-    padding: 14px 18px;
-    margin-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 16px; padding: 14px 18px; margin-top: 12px;
+    display: flex; justify-content: space-between; align-items: center;
   }
-
   .total-box .tl { font-size: 13px; color: var(--text-muted); font-weight: 500; }
   .total-box .tv { font-size: 20px; font-weight: 800; color: var(--primary); }
 
-  .modal-footer {
-    padding: 16px 24px 20px;
-    display: flex;
-    gap: 10px;
-  }
+  .modal-footer { padding: 16px 24px 20px; display: flex; gap: 10px; }
 
   .btn-cancel {
-    flex: 1;
-    padding: 14px;
-    background: #f1f5f9;
-    border: none;
-    border-radius: 14px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.2s;
+    flex: 1; padding: 14px; background: #f1f5f9; border: none; border-radius: 14px;
+    font-family: 'Prompt', sans-serif; font-size: 15px; font-weight: 600;
+    color: #64748b; cursor: pointer; transition: all 0.2s;
   }
-
   .btn-confirm {
-    flex: 2;
-    padding: 14px;
-    background: linear-gradient(135deg, var(--primary-light), var(--sky));
-    border: none;
-    border-radius: 14px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s;
+    flex: 2; padding: 14px; background: linear-gradient(135deg, var(--primary-light), var(--sky));
+    border: none; border-radius: 14px; font-family: 'Prompt', sans-serif;
+    font-size: 15px; font-weight: 700; color: #fff; cursor: pointer; transition: all 0.2s;
     box-shadow: 0 4px 15px rgba(10, 124, 92, 0.35);
   }
-
   .btn-confirm:hover { transform: translateY(-1px); }
   .btn-cancel:hover  { background: #e2e8f0; }
 
   .success-modal {
-    background: #fff;
-    border-radius: 28px;
-    width: 280px;
-    padding: 40px 30px;
-    text-align: center;
-    transform: scale(0.5);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: #fff; border-radius: 28px; width: 280px; padding: 40px 30px; text-align: center;
+    transform: scale(0.5); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 0 30px 80px rgba(0,0,0,0.3);
   }
-
   .overlay.active .success-modal { transform: scale(1); }
 
   .check-circle {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary-light), var(--accent));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-    font-size: 40px;
-    animation: popIn 0.5s ease 0.1s both;
+    width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-light), var(--accent));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 40px; animation: popIn 0.5s ease 0.1s both;
     box-shadow: 0 10px 30px rgba(10, 124, 92, 0.4);
   }
-
   .success-title { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
   .success-sub   { font-size: 13px; color: #888; margin-bottom: 20px; }
 
   .btn-done {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, var(--primary-light), var(--sky));
-    border: none;
-    border-radius: 14px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-    cursor: pointer;
+    width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary-light), var(--sky));
+    border: none; border-radius: 14px; font-family: 'Prompt', sans-serif;
+    font-size: 15px; font-weight: 700; color: #fff; cursor: pointer;
     box-shadow: 0 4px 15px rgba(10, 124, 92, 0.35);
   }
 
-  .config-toggle {
-    text-align: center;
-    margin-bottom: 12px;
-    animation: fadeUp 0.5s ease 0.45s both;
-  }
-
+  .config-toggle { text-align: center; margin-bottom: 12px; animation: fadeUp 0.5s ease 0.45s both; }
   .config-toggle button {
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 12px;
-    padding: 8px 18px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.85);
-    cursor: pointer;
-    transition: all 0.2s;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px; padding: 8px 18px; font-family: 'Prompt', sans-serif;
+    font-size: 13px; color: rgba(255,255,255,0.85); cursor: pointer; transition: all 0.2s;
   }
-
   .config-toggle button:hover { background: rgba(255,255,255,0.22); }
 
   .config-panel {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 20px;
-    padding: 18px;
-    margin-bottom: 16px;
-    display: none;
-    animation: fadeUp 0.3s ease;
+    background: rgba(255,255,255,0.12); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+    padding: 18px; margin-bottom: 16px; display: none; animation: fadeUp 0.3s ease;
   }
-
   .config-panel.open { display: block; }
-
   .config-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
   }
-
-  .config-field label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
-    display: block;
-    margin-bottom: 5px;
-  }
-
+  .config-field label { font-size: 12px; color: rgba(255,255,255,0.7); display: block; margin-bottom: 5px; }
   .config-field input {
-    width: 100%;
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 10px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 13px;
-    color: #fff;
-    margin-bottom: 10px;
+    width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 10px;
+    font-family: 'Prompt', sans-serif; font-size: 13px; color: #fff; margin-bottom: 10px;
   }
-
   .config-field input::placeholder { color: rgba(255,255,255,0.4); }
   .config-field input:focus { outline: none; border-color: var(--accent); }
 
   .btn-save-config {
-    width: 100%;
-    padding: 10px;
-    background: var(--accent);
-    border: none;
-    border-radius: 10px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
+    width: 100%; padding: 10px; background: var(--accent); border: none; border-radius: 10px;
+    font-family: 'Prompt', sans-serif; font-size: 14px; font-weight: 600; color: #fff; cursor: pointer;
   }
 
   .spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    vertical-align: middle;
-    margin-right: 8px;
+    display: inline-block; width: 20px; height: 20px;
+    border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+    animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px;
   }
 
   @keyframes slideDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
@@ -684,11 +320,36 @@
 
   .price-hint { font-size:11px; color:#aaa; margin-top:4px; text-align:right; }
 
-  .divider {
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--border), transparent);
-    margin: 4px 0 12px;
+  .divider { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 4px 0 12px; }
+
+  /* ===== ใหม่: หน่วยลูกค้าแบบไดนามิก ===== */
+  .units-status { font-size: 12px; color: #7a9e92; padding: 10px 0; text-align: center; }
+  .units-status:empty { display: none; }
+  .units-status.error { color: var(--danger); }
+  .units-status button {
+    margin-left: 6px; background: var(--emerald-light); color: var(--primary); border: none;
+    border-radius: 8px; padding: 3px 10px; font-family: 'Prompt', sans-serif; font-size: 12px; cursor: pointer;
   }
+  .add-unit-btn {
+    width: 100%; margin: 10px 0 6px; padding: 11px; background: #fff;
+    border: 2px dashed var(--border); border-radius: 12px;
+    font-family: 'Prompt', sans-serif; font-size: 14px; font-weight: 600;
+    color: var(--primary); cursor: pointer; transition: all 0.2s;
+  }
+  .add-unit-btn:hover { background: var(--emerald-light); border-color: var(--accent); }
+  .extra-unit {
+    background: #fffaf2; border: 1.5px dashed #fcd9a8; border-radius: 14px;
+    padding: 10px 12px; margin-top: 10px; animation: fadeUp 0.3s ease;
+  }
+  .extra-unit-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .extra-unit-top .badge { background: #fff3e0; color: #bf6c00; font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .extra-remove { background: none; border: none; color: var(--danger); font-family: 'Prompt', sans-serif; font-size: 12px; cursor: pointer; }
+  .input-row.extra-row { grid-template-columns: 1.6fr 1fr; }
+  input.extra-name { padding-right: 14px; font-size: 15px; }
+  .extra-save { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 12px; color: #92400e; cursor: pointer; }
+  .extra-save input { width: 18px; height: 18px; accent-color: var(--primary); }
+  .new-badge { background: #fff3e0; color: #bf6c00; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
+  .save-note { margin-top: 8px; padding: 8px 12px; background: #fff8e1; border-radius: 10px; font-size: 12px; color: #92400e; }
 </style>
 </head>
 <body>
@@ -723,41 +384,17 @@
     </div>
     <div class="section-body">
 
-      <div class="field-group">
-        <div class="field-label">🏢 กองพันบริการ <span class="tag">ถัง 18.9 ล.</span></div>
-        <div class="input-wrapper">
-          <input type="number" id="creditService" value="0" min="0" placeholder="0">
-          <span class="unit">ถัง</span>
-        </div>
-      </div>
+      <!-- หน่วยประจำ: สร้างอัตโนมัติจากชีต "หน่วยลูกค้า" -->
+      <div id="creditUnitsContainer"></div>
+      <div class="units-status" id="unitsStatus"></div>
 
-      <div class="field-group">
-        <div class="field-label">🏫 กองพัน นนส. <span class="tag">ถัง 18.9 ล.</span></div>
-        <div class="input-wrapper">
-          <input type="number" id="creditNNS" value="0" min="0" placeholder="0">
-          <span class="unit">ถัง</span>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <div class="field-label">🏛️ ศร.พัน.2 <span class="tag">ถัง 18.9 ล.</span></div>
-        <div class="input-wrapper">
-          <input type="number" id="creditSRP2" value="0" min="0" placeholder="0">
-          <span class="unit">ถัง</span>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <div class="field-label">🏛️ ศร.พัน.1 <span class="tag">ถัง 18.9 ล.</span></div>
-        <div class="input-wrapper">
-          <input type="number" id="creditSRP1" value="0" min="0" placeholder="0">
-          <span class="unit">ถัง</span>
-        </div>
-      </div>
+      <!-- หน่วยเพิ่มเติม (เฉพาะวัน) -->
+      <div id="extraUnitsContainer"></div>
+      <button type="button" class="add-unit-btn" onclick="addExtraUnit()">➕ เพิ่มหน่วยอื่น</button>
 
       <div class="divider"></div>
 
-      <!-- 350 ml — กรอกจำนวน + ของแถมด้วยมือ -->
+      <!-- 350 ml -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 350 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
         <div class="input-row">
@@ -778,7 +415,7 @@
         </div>
       </div>
 
-      <!-- 500 ml — กรอกจำนวน + ของแถมด้วยมือ -->
+      <!-- 500 ml -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 500 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
         <div class="input-row">
@@ -799,7 +436,7 @@
         </div>
       </div>
 
-      <!-- 600 ml — กรอกจำนวน + ของแถมด้วยมือ -->
+      <!-- 600 ml -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 600 ml. <span class="tag">แพ็ค (เชื่อ)</span></div>
         <div class="input-row">
@@ -834,7 +471,6 @@
     </div>
     <div class="section-body">
 
-      <!-- น้ำถัง 18.9 ลิตร -->
       <div class="field-group">
         <div class="field-label">🪣 น้ำถัง 18.9 ลิตร <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -856,7 +492,6 @@
         <div class="price-hint">รวม: <strong id="cashTank189Total">0</strong> บาท</div>
       </div>
 
-      <!-- น้ำพร้อมถัง -->
       <div class="field-group">
         <div class="field-label">🫙 น้ำพร้อมถัง <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -878,7 +513,6 @@
         <div class="price-hint">รวม: <strong id="cashReadyTankTotal">0</strong> บาท</div>
       </div>
 
-      <!-- 350 ml -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 350 ml. <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -900,7 +534,6 @@
         <div class="price-hint">รวม: <strong id="cash350Total">0</strong> บาท</div>
       </div>
 
-      <!-- 600 ml -->
       <div class="field-group">
         <div class="field-label">🧴 น้ำดื่ม 600 ml. <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -922,7 +555,6 @@
         <div class="price-hint">รวม: <strong id="cash600Total">0</strong> บาท</div>
       </div>
 
-      <!-- ฝาถัง -->
       <div class="field-group">
         <div class="field-label">🪣 ฝาถัง <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -944,7 +576,6 @@
         <div class="price-hint">รวม: <strong id="cashLidTotal">0</strong> บาท</div>
       </div>
 
-      <!-- ถังเปล่า -->
       <div class="field-group">
         <div class="field-label">🛢️ ถังเปล่า <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -1045,12 +676,19 @@ function saveConfig() {
   localStorage.setItem('lineToken',     CONFIG.lineToken);
   alert('✅ บันทึกการตั้งค่าเรียบร้อย');
   toggleConfig();
+  loadUnits();
 }
 
 function toggleConfig() {
   document.getElementById('configPanel').classList.toggle('open');
   loadConfig();
 }
+
+// =================== UTIL ===================
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function normName(s) { return String(s || '').replace(/\s+/g, ' ').trim(); }
 
 // =================== DATE ===================
 function setDefaultDate() {
@@ -1066,6 +704,109 @@ function formatDateThai(dateStr) {
   const months = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
   const [y, m, d] = dateStr.split('-');
   return `${parseInt(d)} ${months[parseInt(m)-1]} ${parseInt(y)+543}`;
+}
+
+// =================== หน่วยลูกค้า (โหลดจาก Google Sheets) ===================
+let UNITS = [];
+const UNITS_CACHE_KEY = 'creditUnitsCache';
+
+function setUnitsStatus(msg, isError, withRetry) {
+  const el = document.getElementById('unitsStatus');
+  el.className = 'units-status' + (isError ? ' error' : '');
+  el.innerHTML = msg ? msg + (withRetry ? ' <button type="button" onclick="loadUnits()">🔄 ลองใหม่</button>' : '') : '';
+}
+
+function renderUnits() {
+  const box  = document.getElementById('creditUnitsContainer');
+  const prev = {};
+  box.querySelectorAll('.credit-unit-input').forEach(inp => prev[inp.dataset.unit] = inp.value);
+
+  box.innerHTML = UNITS.map(u => `
+    <div class="field-group">
+      <div class="field-label">${escapeHtml(u.icon)} ${escapeHtml(u.name)} <span class="tag">ถัง 18.9 ล.</span></div>
+      <div class="input-wrapper">
+        <input type="number" class="credit-unit-input" data-unit="${escapeHtml(u.name)}" data-icon="${escapeHtml(u.icon)}"
+               value="${escapeHtml(prev[u.name] ?? 0)}" min="0" placeholder="0" inputmode="decimal">
+        <span class="unit">ถัง</span>
+      </div>
+    </div>`).join('');
+}
+
+async function loadUnits() {
+  const cached = localStorage.getItem(UNITS_CACHE_KEY);
+  if (cached) {
+    try { UNITS = JSON.parse(cached) || []; renderUnits(); } catch (e) {}
+  }
+  if (!CONFIG.appsScriptUrl) {
+    setUnitsStatus('⚠️ ยังไม่ได้ตั้งค่า Apps Script URL — กด "⚙️ ตั้งค่าการเชื่อมต่อ" ด้านล่าง', true);
+    return;
+  }
+  setUnitsStatus('🔄 กำลังโหลดรายชื่อหน่วย...');
+  try {
+    const sep    = CONFIG.appsScriptUrl.includes('?') ? '&' : '?';
+    const resp   = await fetch(CONFIG.appsScriptUrl + sep + 'action=units&t=' + Date.now());
+    const result = await resp.json();
+    if (!result.success) throw new Error(result.error || 'Apps Script ยังเป็นเวอร์ชันเก่า (ต้อง Deploy ใหม่)');
+    UNITS = result.units || [];
+    localStorage.setItem(UNITS_CACHE_KEY, JSON.stringify(UNITS));
+    renderUnits();
+    setUnitsStatus(UNITS.length ? '' : 'ยังไม่มีหน่วยที่เปิดใช้งานในชีต "หน่วยลูกค้า"', !UNITS.length);
+  } catch (e) {
+    console.error('Load units error:', e);
+    setUnitsStatus(UNITS.length ? '⚠️ โหลดรายชื่อล่าสุดไม่ได้ (ใช้รายชื่อที่จำไว้)' : '⚠️ โหลดรายชื่อหน่วยไม่สำเร็จ', true, true);
+  }
+}
+
+// ---- หน่วยเพิ่มเติม (เฉพาะวัน) ----
+let extraSeq = 0;
+function addExtraUnit() {
+  const id  = ++extraSeq;
+  const div = document.createElement('div');
+  div.className = 'extra-unit';
+  div.id = 'extra-' + id;
+  div.innerHTML = `
+    <div class="extra-unit-top">
+      <span class="badge">➕ หน่วยเพิ่มเติม</span>
+      <button type="button" class="extra-remove" onclick="removeExtraUnit(${id})">✕ ลบ</button>
+    </div>
+    <div class="input-row extra-row">
+      <div>
+        <div class="input-sub-label">ชื่อหน่วย</div>
+        <input type="text" class="extra-name" placeholder="เช่น ศร.พัน.1" maxlength="50">
+      </div>
+      <div>
+        <div class="input-sub-label">จำนวน</div>
+        <div class="input-wrapper">
+          <input type="number" class="extra-qty" value="0" min="0" placeholder="0" inputmode="decimal">
+          <span class="unit">ถัง</span>
+        </div>
+      </div>
+    </div>
+    <label class="extra-save">
+      <input type="checkbox" class="extra-save-chk"> ⭐ บันทึกเป็นหน่วยประจำ (ครั้งหน้าขึ้นในรายการอัตโนมัติ)
+    </label>`;
+  document.getElementById('extraUnitsContainer').appendChild(div);
+  div.querySelector('.extra-name').focus();
+}
+
+function removeExtraUnit(id) {
+  const el = document.getElementById('extra-' + id);
+  if (el) el.remove();
+}
+
+// รวมชื่อซ้ำ + ตัดยอด 0 (ใช้แสดงพรีวิว — ฝั่ง Apps Script ทำซ้ำอีกชั้น)
+function mergeCreditUnits(list) {
+  const map = {}, order = [];
+  list.forEach(u => {
+    const name = normName(u.name);
+    const qty  = Number(u.qty) || 0;
+    if (!name || qty <= 0) return;
+    const key = name.toLowerCase();
+    if (!map[key]) { map[key] = { name, icon: u.icon, qty: 0, type: u.type }; order.push(key); }
+    else if (u.type !== 'extra') map[key].type = 'regular';
+    map[key].qty += qty;
+  });
+  return order.map(k => map[k]);
 }
 
 // =================== PRICE CALC ===================
@@ -1087,12 +828,24 @@ function calcPrice(type) {
 // =================== GET DATA ===================
 function getData() {
   const g = id => parseFloat(document.getElementById(id).value) || 0;
+
+  const creditUnits  = [];
+  const saveNewUnits = [];
+  document.querySelectorAll('.credit-unit-input').forEach(inp => {
+    creditUnits.push({ name: inp.dataset.unit, icon: inp.dataset.icon, qty: parseFloat(inp.value) || 0, type: 'regular' });
+  });
+  document.querySelectorAll('.extra-unit').forEach(div => {
+    const name = normName(div.querySelector('.extra-name').value);
+    const qty  = parseFloat(div.querySelector('.extra-qty').value) || 0;
+    if (!name) return;
+    creditUnits.push({ name, icon: '🪖', qty, type: 'extra' });
+    if (div.querySelector('.extra-save-chk').checked && !saveNewUnits.includes(name)) saveNewUnits.push(name);
+  });
+
   return {
     reportDate:           document.getElementById('reportDate').value,
-    creditService:        g('creditService'),
-    creditNNS:            g('creditNNS'),
-    creditSRP2:           g('creditSRP2'),
-    creditSRP1:           g('creditSRP1'),
+    creditUnits:          creditUnits,
+    saveNewUnits:         saveNewUnits,
     credit350:            g('credit350'),
     bonus350:             g('bonus350'),
     credit500:            g('credit500'),
@@ -1121,31 +874,49 @@ function getData() {
   };
 }
 
+// ตรวจหน่วยเพิ่มเติม: มีจำนวนแต่ไม่ใส่ชื่อ
+function validateExtraUnits() {
+  for (const div of document.querySelectorAll('.extra-unit')) {
+    const name = normName(div.querySelector('.extra-name').value);
+    const qty  = parseFloat(div.querySelector('.extra-qty').value) || 0;
+    if (!name && qty > 0) {
+      alert('⚠️ กรุณาใส่ชื่อหน่วยในช่อง "หน่วยเพิ่มเติม" ที่มีจำนวนถัง');
+      div.querySelector('.extra-name').focus();
+      return false;
+    }
+  }
+  return true;
+}
+
 // =================== PREVIEW ===================
 function previewData() {
+  if (!validateExtraUnits()) return;
+
   const d        = getData();
   const bonus350 = d.bonus350 || 0;
   const bonus600 = d.bonus600 || 0;
-  const totalCredit = d.creditService + d.creditNNS + d.creditSRP2 + d.creditSRP1;
+  const units    = mergeCreditUnits(d.creditUnits);
+  const totalCredit = units.reduce((s, u) => s + u.qty, 0);
   const totalCash   = d.cashTank189Baht + d.cashReadyTankBaht + d.cash350Baht + d.cash600Baht + (d.cashLidBaht || 0) + (d.cashEmptyTankBaht || 0);
 
   document.getElementById('previewDate').textContent = `📅 ${formatDateThai(d.reportDate)}`;
 
+  let unitRows = units.map(u => `
+      <div class="summary-row"><span class="label">${escapeHtml(u.icon)} ${escapeHtml(u.name)}${u.type === 'extra' ? '<span class="new-badge">เพิ่มเติม</span>' : ''}</span><span class="value">${u.qty} ถัง</span></div>`).join('');
+  if (!units.length) unitRows = `<div class="summary-row"><span class="label" style="color:#aaa">— ไม่มียอดเชื่อน้ำถัง —</span><span class="value">0 ถัง</span></div>`;
+
   let html = `
     <div class="summary-section">
       <div class="summary-title">📋 เงินเชื่อ - น้ำถัง</div>
-      <div class="summary-row"><span class="label">🏢 กองพันบริการ</span><span class="value">${d.creditService} ถัง</span></div>
-      <div class="summary-row"><span class="label">🏫 กองพัน นนส.</span><span class="value">${d.creditNNS} ถัง</span></div>
-      <div class="summary-row"><span class="label">🏛️ ศร.พัน.2</span><span class="value">${d.creditSRP2} ถัง</span></div>
-      <div class="summary-row"><span class="label">🏛️ ศร.พัน.1</span><span class="value">${d.creditSRP1} ถัง</span></div>
+      ${unitRows}
       <div class="summary-row"><span class="label">✅ รวมถังเชื่อ</span><span class="value total">${totalCredit} ถัง</span></div>
+      ${d.saveNewUnits.length ? `<div class="save-note">⭐ จะบันทึกเป็นหน่วยประจำ: ${d.saveNewUnits.map(escapeHtml).join(', ')}</div>` : ''}
     </div>`;
 
   if (d.credit350 > 0 || d.credit500 > 0 || d.credit600 > 0) {
     html += `
     <div class="summary-section">
       <div class="summary-title">🧴 เงินเชื่อ - บรรจุภัณฑ์</div>`;
-
     if (d.credit350 > 0) {
       html += `<div class="summary-row"><span class="label">🔸 350 ml.</span><span class="value">${d.credit350} แพ็ค (แถม ${bonus350} แพ็ค)</span></div>`;
     }
@@ -1156,7 +927,6 @@ function previewData() {
     if (d.credit600 > 0) {
       html += `<div class="summary-row"><span class="label">🔸 600 ml.</span><span class="value">${d.credit600} แพ็ค (แถม ${bonus600} แพ็ค)</span></div>`;
     }
-
     html += `</div>`;
   }
 
@@ -1186,7 +956,7 @@ function previewData() {
     </div>`;
 
   if (d.note) {
-    html += `<div style="margin-top:12px;padding:10px 14px;background:#f8fafc;border-radius:12px;font-size:13px;color:#555">📝 ${d.note}</div>`;
+    html += `<div style="margin-top:12px;padding:10px 14px;background:#f8fafc;border-radius:12px;font-size:13px;color:#555">📝 ${escapeHtml(d.note)}</div>`;
   }
 
   document.getElementById('previewBody').innerHTML = html;
@@ -1205,12 +975,14 @@ async function submitData() {
 
   const data = getData();
   let sheetOk = false;
+  let addedUnits = [];
 
   if (CONFIG.appsScriptUrl) {
     try {
       const resp   = await fetch(CONFIG.appsScriptUrl, { method: 'POST', body: JSON.stringify(data) });
       const result = await resp.json();
-      sheetOk = result.success;
+      sheetOk    = result.success;
+      addedUnits = result.addedUnits || [];
     } catch (e) {
       console.error('Sheets error:', e);
     }
@@ -1223,10 +995,13 @@ async function submitData() {
     successMsg = '⚠️ ยังไม่ได้ตั้งค่า URL กรุณาตั้งค่าก่อนใช้งานจริง<br>(ทดสอบระบบสำเร็จ)';
   } else {
     successMsg = `📊 Google Sheets: ${sheetOk ? '✅ สำเร็จ' : '⚠️ ตรวจสอบ URL'}<br>📲 LINE: ${sheetOk ? '✅ ส่งแล้ว' : '⚠️ ตรวจสอบ Token'}`;
+    if (addedUnits.length) successMsg += `<br>⭐ เพิ่มหน่วยประจำ: ${addedUnits.map(escapeHtml).join(', ')}`;
   }
 
   document.getElementById('successSub').innerHTML = successMsg;
   document.getElementById('successOverlay').classList.add('active');
+
+  if (sheetOk && data.saveNewUnits.length) loadUnits();
 
   btn.disabled  = false;
   btn.innerHTML = '✅ ยืนยัน &amp; บันทึก';
@@ -1238,10 +1013,12 @@ function closeSuccess() {
 }
 
 function resetForm() {
-  ['creditService','creditNNS','creditSRP2','creditSRP1','credit350','bonus350','credit500','bonus500','credit600','bonus600',
+  ['credit350','bonus350','credit500','bonus500','credit600','bonus600',
    'cashTank189','cashReadyTank','cash350','cash600','cashLid','cashEmptyTank'].forEach(id => {
     document.getElementById(id).value = 0;
   });
+  document.querySelectorAll('.credit-unit-input').forEach(inp => inp.value = 0);
+  document.getElementById('extraUnitsContainer').innerHTML = '';
   document.getElementById('note').value = '';
   ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total','cashLidTotal','cashEmptyTankTotal'].forEach(id => {
     document.getElementById(id).textContent = '0';
@@ -1251,6 +1028,7 @@ function resetForm() {
 // =================== INIT ===================
 setDefaultDate();
 loadConfig();
+loadUnits();
 </script>
 </body>
 </html>
