@@ -350,6 +350,13 @@
   .extra-save input { width: 18px; height: 18px; accent-color: var(--primary); }
   .new-badge { background: #fff3e0; color: #bf6c00; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
   .save-note { margin-top: 8px; padding: 8px 12px; background: #fff8e1; border-radius: 10px; font-size: 12px; color: #92400e; }
+  .flex-toggle {
+   display: flex; align-items: center; gap: 8px; margin-top: 8px;
+   padding: 8px 12px; background: #f0f9ff; border: 1.5px dashed #7dd3fc;
+   border-radius: 10px; font-size: 13px; color: var(--sky); font-weight: 500; cursor: pointer;
+  }
+  .flex-toggle input { width: 18px; height: 18px; accent-color: var(--sky); }
+
 </style>
 </head>
 <body>
@@ -554,7 +561,30 @@
         </div>
         <div class="price-hint">รวม: <strong id="cash600Total">0</strong> บาท</div>
       </div>
-
+      <!-- 600 ml พิเศษ -->
+      <div class="field-group">
+        <div class="field-label">🧴 น้ำดื่ม 600 ml. (พิเศษ) <span class="tag blue">สด/โอน</span> <span class="tag special-tag">พิเศษ</span></div>
+        <div class="input-row">
+          <div>
+            <div class="input-sub-label">จำนวน</div>
+            <div class="input-wrapper">
+              <input type="number" id="cash600Sp" value="0" min="0" oninput="calcPrice('600sp')">
+              <span class="unit">แพ็ค</span>
+            </div>
+          </div>
+          <div>
+            <div class="input-sub-label">ราคา/แพ็ค (บาท)</div>
+            <div class="input-wrapper">
+              <input type="number" id="cash600SpPrice" value="40" min="0" oninput="calcPrice('600sp')">
+              <span class="unit">฿</span>
+            </div>
+          </div>
+        </div>
+        <div class="price-hint">รวม: <strong id="cash600SpTotal">0</strong> บาท</div>
+        <label class="flex-toggle">
+          <input type="checkbox" id="cash600SpShow" checked onchange="saveSpShow()"> 📲 แสดงรายการนี้ใน LINE
+        </label>
+      </div>
       <div class="field-group">
         <div class="field-label">🪣 ฝาถัง <span class="tag blue">สด/โอน</span></div>
         <div class="input-row">
@@ -816,6 +846,7 @@ function calcPrice(type) {
     'readyTank': { qty: 'cashReadyTank', price: 'cashReadyTankPrice', total: 'cashReadyTankTotal' },
     '350':       { qty: 'cash350',       price: 'cash350Price',       total: 'cash350Total'       },
     '600cash':   { qty: 'cash600',       price: 'cash600Price',       total: 'cash600Total'       },
+    '600sp':     { qty: 'cash600Sp',     price: 'cash600SpPrice',     total: 'cash600SpTotal'     },
     'lid':       { qty: 'cashLid',       price: 'cashLidPrice',       total: 'cashLidTotal'       },
     'emptyTank': { qty: 'cashEmptyTank', price: 'cashEmptyTankPrice', total: 'cashEmptyTankTotal' },
   };
@@ -864,6 +895,10 @@ function getData() {
     cash600:              g('cash600'),
     cash600Price:         g('cash600Price'),
     cash600Baht:          g('cash600')       * g('cash600Price'),
+    cash600Sp:            g('cash600Sp'),
+    cash600SpPrice:       g('cash600SpPrice'),
+    cash600SpBaht:        g('cash600Sp')     * g('cash600SpPrice'),
+    cash600SpShow:        document.getElementById('cash600SpShow').checked,
     cashLid:              g('cashLid'),
     cashLidPrice:         g('cashLidPrice'),
     cashLidBaht:          g('cashLid')       * g('cashLidPrice'),
@@ -894,10 +929,10 @@ function previewData() {
 
   const d        = getData();
   const bonus350 = d.bonus350 || 0;
-  const bonus600 = d.bonus600 || 0;
+  const bonus600 = d.bonus600 || 0;                     
   const units    = mergeCreditUnits(d.creditUnits);
   const totalCredit = units.reduce((s, u) => s + u.qty, 0);
-  const totalCash   = d.cashTank189Baht + d.cashReadyTankBaht + d.cash350Baht + d.cash600Baht + (d.cashLidBaht || 0) + (d.cashEmptyTankBaht || 0);
+  const totalCash   = d.cashTank189Baht + d.cashReadyTankBaht + d.cash350Baht + d.cash600Baht + (d.cashLidBaht || 0) + (d.cashEmptyTankBaht || 0) + (d.cash600SpBaht || 0);
 
   document.getElementById('previewDate').textContent = `📅 ${formatDateThai(d.reportDate)}`;
 
@@ -938,6 +973,7 @@ function previewData() {
   if (d.cashReadyTank > 0) html += `<div class="summary-row"><span class="label">🫙 น้ำพร้อมถัง (${d.cashReadyTank} ถัง × ${d.cashReadyTankPrice}฿)</span><span class="value">${d.cashReadyTankBaht.toLocaleString()} บาท</span></div>`;
   if (d.cash350 > 0)       html += `<div class="summary-row"><span class="label">🧴 350 ml. (${d.cash350} แพ็ค × ${d.cash350Price}฿)</span><span class="value">${d.cash350Baht.toLocaleString()} บาท</span></div>`;
   if (d.cash600 > 0)       html += `<div class="summary-row"><span class="label">🧴 600 ml. (${d.cash600} แพ็ค × ${d.cash600Price}฿)</span><span class="value">${d.cash600Baht.toLocaleString()} บาท</span></div>`;
+  if (d.cash600Sp > 0)     html += `<div class="summary-row"><span class="label">🧴 600 ml. พิเศษ (${d.cash600Sp} แพ็ค × ${d.cash600SpPrice}฿)${d.cash600SpShow ? '' : '<span class="new-badge">ไม่แสดงใน LINE</span>'}</span><span class="value">${d.cash600SpBaht.toLocaleString()} บาท</span></div>`;
   if (d.cashLid > 0)       html += `<div class="summary-row"><span class="label">🪣 ฝาถัง (${d.cashLid} ฝา × ${d.cashLidPrice}฿)</span><span class="value">${(d.cashLidBaht||0).toLocaleString()} บาท</span></div>`;
   if (d.cashEmptyTank > 0) html += `<div class="summary-row"><span class="label">🛢️ ถังเปล่า (${d.cashEmptyTank} ถัง × ${d.cashEmptyTankPrice}฿)</span><span class="value">${(d.cashEmptyTankBaht||0).toLocaleString()} บาท</span></div>`;
 
@@ -954,7 +990,9 @@ function previewData() {
         <div class="tv" style="color:var(--sky)">${totalCash.toLocaleString()} บาท</div>
       </div>
     </div>`;
-
+  if (!d.cash600SpShow && d.cash600SpBaht > 0) {
+    html += `<div class="save-note">📲 รายการ 600 ml. พิเศษ จะไม่แสดงใน LINE — ยอดเงินสดใน LINE จะเป็น ${(totalCash - d.cash600SpBaht).toLocaleString()} บาท</div>`;
+  }
   if (d.note) {
     html += `<div style="margin-top:12px;padding:10px 14px;background:#f8fafc;border-radius:12px;font-size:13px;color:#555">📝 ${escapeHtml(d.note)}</div>`;
   }
@@ -1014,16 +1052,25 @@ function closeSuccess() {
 
 function resetForm() {
   ['credit350','bonus350','credit500','bonus500','credit600','bonus600',
-   'cashTank189','cashReadyTank','cash350','cash600','cashLid','cashEmptyTank'].forEach(id => {
+   'cashTank189','cashReadyTank','cash350','cash600','cash600Sp','cashLid','cashEmptyTank'].forEach(id => {
     document.getElementById(id).value = 0;
   });
   document.querySelectorAll('.credit-unit-input').forEach(inp => inp.value = 0);
   document.getElementById('extraUnitsContainer').innerHTML = '';
   document.getElementById('note').value = '';
-  ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total','cashLidTotal','cashEmptyTankTotal'].forEach(id => {
+  ['cashTank189Total','cashReadyTankTotal','cash350Total','cash600Total','cash600SpTotal','cashLidTotal','cashEmptyTankTotal'].forEach(id => {
     document.getElementById(id).textContent = '0';
   });
 }
+// =================== 600ml พิเศษ: จำค่าแสดงใน LINE ===================
+function saveSpShow() {
+  localStorage.setItem('cash600SpShow', document.getElementById('cash600SpShow').checked ? '1' : '0');
+}
+(function restoreSpShow() {
+  const v = localStorage.getItem('cash600SpShow');
+  if (v !== null) document.getElementById('cash600SpShow').checked = (v === '1');
+})();
+
 
 // =================== INIT ===================
 setDefaultDate();
